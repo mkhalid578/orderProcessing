@@ -1,1 +1,0 @@
-# This is Sprint 1 (First Sprint of the project)
