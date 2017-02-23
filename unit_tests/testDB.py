@@ -3,10 +3,6 @@
 import MySQLdb as sql
 from os import sys
 
-config = {'host':'104.196.156.219',
-           'user':'root',
-           'passwd':'bane786',
-           'db':'order_processing_app'}
 
 def checkConnection():
     print "Checking connection to mySQL instance"
