@@ -1,14 +1,10 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']  = 'mysql://root:bane786@104.196.156.219/order_processing_app'
 
-db = SQLAlchemy(app)
-
-@app.route('/')
+@app.route('/home')
 def index():
-    return "Hello flask"
+    return render_template('index.html')
 
 
 if __name__ == "__main__":
