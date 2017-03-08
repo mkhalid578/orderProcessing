@@ -1,6 +1,13 @@
 # SW Engineering Project
 ## Order Processing Application
 
+## Scrum/Agile Environment
+* In this project we will be using Agile/Scrum Methodology
+* We will be using ZenHub as a tool to help us implement an Agile environment
+* In order for you to see the "Scrum Board", you must add ZenHub as an extension on your Chrome Browser:
+ * https://www.zenhub.com/
+* Once ZenHub is installed, GitHub will now have two additional columns, _Boards_ and _Reports_. This is where our product backlog, and sprint backlogs are kept. In addition that, we also have our burndown charts to show our sprint velocity. 
+
 ## Sprints 
 * We have included all the information pertaining to backlogs and sprint backlogs under /Sprints/README.md 
 * We will conduct daily sprint meetings and ask the 3 important questions: 
@@ -9,6 +16,8 @@
   * What are you stuck one? Do you need help with anything? 
 
 * The designated ScrumMaster is Muhammed Khalid (@mkhalid578)
+* The Product Owner is Vibhuti Patel (@vibhuti_patel1)
+* The Principal Software Engineer is Michael Bertucci (@michael_bertucci1)
 
 ## Branches 
 
@@ -29,3 +38,8 @@
 * MySQL Branch
   * All development related to the mysql database will be performed in this branch 
   * So far only a .sql file has been created
+  * We have a single database with three tables. More information is provided in the sql file. 
+  
+* User Interface Branch
+  * This will contain all the GUI elements of the project. 
+  * HTML/CSS/JS files
