@@ -64,3 +64,13 @@
 * Overall, each team member has a good grasp of their stories
 * No issues thus far
 
+## Meeting #5 | Location: Online | 03/11
+ * Began the meeting by asking each team member their progress on tasks
+ * Vibhuti is still working on her stories with no issues
+ * Michael is still working on his stories with no issues
+ * Muhammed is working on the backend for the python sql api in addition to the login backend
+ * No issues thus far 
+ * Posibility of meeting on campus tomorrow to discuss possible issues
+
+## Meeting #6 
+* TBA
