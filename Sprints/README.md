@@ -11,29 +11,56 @@
 * Give Edit Permissions for Orders depending on User Type #23
 * Find Hosting Platform for mySQL Database #24
 * create a mySQL Database #25
+* Add backend to User Submission UI #26
+* Login Backend #27
 
 # Sprint 1
 ## Backlog
 
-* Create New Order Submission UI #16
-* Create User Login Page #17
-* Create UI showing list of orders #18
-* Create Python SQL API #20
-* Find Hosting Platform for mySQL Database #24
-* create a mySQL Database #25
+| Stories                                  |
+| ------------------------------------     |
+| Create New Order Submission UI           | 
+| Add backend to User Submission UI        |
+| Create User Login Page                   |
+| Login Backend                            |
+| Create UI showing list of orders         |
+| Create Python SQL API                    |
+| Find Hosting Platform for mySQL Database |
+| Create a mySQL Database                  |
 
-## Sprint 1 | Meeting #1 | Location: Olsen 401 | 03/02/2017
+## Meeting #1 | Location: Olsen 401 | 03/02/2017
 * Discussed some issues regarding the project
 * Met after class to discuss the direction the of project
 * Set up ideal times for Sprint meetings
 * Also discussed if we are not available to meet in person, that we meet via Skype or phone call. 
 
-## Sprint 1 | Meeting #2 | Location: Lyndon Library | 03/07
+## Meeting #2 | Location: Lyndon Library | 03/07
 * This was our Sprint Planning meeting
 * We created a product backlog which contained features to put into the product
 * Reviewed the backlog with the entire team. 
 * Finalized backlog and created a sprint backlog
 
-## Sprint 1 | Meeting #3 | Location: Online | 03/09
+## Meeting #3 | Location: Online | 03/09
 * Assigned story points to tasks in Sprint 1 Backlog
+* Assigned tasks from sprint backlog to team members 
+* Provided an estimate for each task in hours
+
+| Stories                                  | Assignee         | Estimate (Hours) |
+|------------------------------------------|------------------|------------------|
+| Create New Order Submission UI           | Vibhuti Patel    | 4                |
+| Add backend to User Submission UI        | Michael Bertucci | 5                |
+| Create User Login Page                   | Vibhuti Patel    | 2                |
+| Login Backend                            | Muhammed Khalid  | 4                |
+| Create UI showing list of orders         | Vibhuti Patel    | 4                |
+| Create Python SQL API                    | Muhammed Khalid  | 3                |
+| Find Hosting Platform for mySQL Database | Muhammed Khalid  | 1                |
+| Create a mySQL Database                  | Vibhuti Patel    | 2                |
+
+## Meeting #4 | Location: Online | 03/10
+* Asked each team member regarding their stories
+  * What have you don since the last sprint meeting?
+  * What are you going to do today? 
+  * Do you need help with anything? Are you stuck? 
+* Overall, each team member has a good grasp of their stories
+* No issues thus far
 
