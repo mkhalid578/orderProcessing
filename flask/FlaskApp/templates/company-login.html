@@ -1,0 +1,58 @@
+
+<html>
+	<head>
+  	<title>Oder Processing Application </title>
+	</head>
+
+	<body>
+
+  	<h1 style="color: chocolate;color-adjust: exact;">
+			<br>Order Processing System</br>
+		</h1>
+		<hr style="color: brown;width: auto;  display: block;
+    						margin-top: 0.5em;margin-bottom: 0.5em;
+    						margin-left: auto;margin-right: auto;
+    						border-style: inset; border-width: 10px;">
+
+	{% block body %}
+
+    <h1 style="padding-left: 250px;">Company Login</h1>
+
+		<div id="company-login">
+			<form action="" style="padding-left: 250px;" method="post">
+				<input id="company-user-id" type="text" placeholder="Company User ID" name="CompanyUserId" value="{{request.form.CompanyUserId}}"><br><br>
+				<input id="company-password" type="text" placeholder="Password" name="CompanyPassword" value="{{request.form.CompanyPassword}}"><br><br>
+				<input type="submit" value="Login">
+			</form>
+			<hr style="width: 500px;color: brown;height: 5px; margin-left: 200px; " >
+
+			{% endblock %}
+
+			<h1 style="padding-left: 200px;font-size: unset;color: steelblue;" >
+				Register New Company Account
+			</h1>
+			<button id="bt-new-company-account" type="button" onclick="alert('Hello world!')"
+    	        style="font-size: inherit; margin-left: 250px;" >
+					 		Create</button>
+		
+			<form action="/action_page.php" style="padding-left: 250px;padding-top: 25px;width: 400px; display: none;">
+  				<fieldset>
+	      			<label id="incorrect-new-company-userid" style="display: none;" >
+			  			<br>Please, correct your user-id. user-id should not have more than 500 char.<br>
+		  			</label>
+	      			<label id="incorrect-new-company-password" style="display: none;" >
+			  			<br>Please, correct your password. password should not have more than 12 char.<br>
+		  			</label>
+    				<br>
+					<legend>Company information:</legend>
+					<input id="new-company-user-id" type="text" placeholder="Company User ID" name="NewCompanyUserId" value=" ">
+    				<br><br>
+  	  				<input id="new-company-password" type="text" placeholder="Password" name="NewCompanyPassword" value="">
+
+    				<input id="submit-new-company-account" type="submit" value="Submit">
+  				</fieldset>
+			</form>
+  		</div>
+	</body>
+</html>
+

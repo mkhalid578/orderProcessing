@@ -1,0 +1,45 @@
+
+<html>
+	<head>
+  		<title>Order Processing Application </title>
+		<link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body>
+
+  	<h1 style="color: chocolate;color-adjust: exact;">
+		<br>
+		Order Processing System
+		</br>
+	</h1>
+		<hr style="color: brown;width: auto;  display: block;
+    			   margin-top: 0.5em;margin-bottom: 0.5em;
+    			   margin-left: auto;margin-right: auto;
+    			   border-style: inset; border-width: 10px;">
+
+	{% block body %}
+    <h1 style="padding-left: 250px;">Employ Login</h1>
+	  <div id="employ-login">
+		  <form action="" method="post" style="padding-left: 250px;">
+			  <input id="employ-user-id" type="text" placeholder="Employ ID" name="username" value="{{request.form.username}}"><br><br>
+			  <input id="employ-password" type="text" placeholder="Password" name="password" value="{{request.form.password}}"><br><br>
+			  <input class="btn btn-default" type="submit" value="Login">
+		  </form>
+
+		  {% if error %}
+		  <p class=error style="padding-left: 250px;"><strong>Error:</strong> {{ error }} </p>
+		  {% endif %}
+
+	{% endblock %}
+
+			<hr style="width: 500px;color: brown;height: 5px; margin-left: 200px; " >
+
+			<h1 style="padding-left: 200px;font-size: unset;color: steelblue;" > Register New Employee Account </h1>
+			<button id="bt-new-employ-account" type="button" onclick="alert('Hello world!')"
+					style="font-size: inherit; margin-left: 250px; display: block;" >
+					 		Create
+			</button>
+  		</div>
+	</body>
+</html>
+
