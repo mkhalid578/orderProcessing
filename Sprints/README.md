@@ -17,6 +17,16 @@
 # Sprint 1
 ## Backlog
 
+####Roles
+
+| Member | Role|
+|--------|------|
+| Michael Bertucci | Senior SW Engineer |
+| Vibhuti Patel | Principal SW Engineer and Product Owner |
+| Muhammed Khalid | ScrumMaster and SW Engineer |
+
+
+
 | Stories                                  |
 | ------------------------------------     |
 | Create New Order Submission UI           | 
