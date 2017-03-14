@@ -6,26 +6,26 @@
   * Our app is currently locally hosted
   * We have only hosted our database on Google Cloud
 
- #####You can clone our master branch to your machine:
+ ##### You can clone our master branch to your machine:
  ```linux
  git clone https://github.com/mkhalid578/sw_eng_project.git
  ```
- #####Go to the FlaskApp directory 
+ ##### Go to the FlaskApp directory 
  
  ```linux
  cd flask/FlaskApp
  ```
- #####Run the web app as such:
+ ##### Run the web app as such:
  
  ```python
  python app.py
  ```
- #####You will be prompted with a message letting you know the server is running locally
+ ##### You will be prompted with a message letting you know the server is running locally
  
  ```linux
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  ```
- #####Open a web browser and type or paste in that address.  
+ ##### Open a web browser and type or paste in that address.  
 
 ## Scrum/Agile Environment
 * In this project we will be using Agile/Scrum Methodology
