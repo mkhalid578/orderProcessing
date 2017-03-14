@@ -10,10 +10,30 @@
  ```linux
  git clone https://github.com/mkhalid578/sw_eng_project.git
  ```
+ 
+ #### A Few Important Dependencies 
+ 
+ ##### You will need Python installed on your machine (Python 2.7 recommended)
+ 
+ ```linux
+ sudo apt-get install python
+ ```
+ ##### The Flask extension 
+ 
+ ```linux
+ sudo pip install flask
+ ``` 
+ 
+ ##### The pymsql library 
+ 
+ ```linux
+ sudo pip install pymysql
+ ```
+ 
  ##### Go to the FlaskApp directory 
  
  ```linux
- cd flask/FlaskApp
+ cd sw_eng_project/flask/FlaskApp
  ```
  ##### Run the web app as such:
  
@@ -25,7 +45,11 @@
  ```linux
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  ```
- ##### Open a web browser and type or paste in that address.  
+ ##### Open a web browser and type or paste the following into your address bar:
+ 
+ ```linux
+ http://127.0.0.1:5000/compLogin
+ ```
 
 ## Scrum/Agile Environment
 * In this project we will be using Agile/Scrum Methodology
