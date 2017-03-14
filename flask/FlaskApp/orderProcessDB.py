@@ -16,6 +16,11 @@ class EmployInfo(object):
         
         self.cur = self.sqlConnection.cursor()
 
+    def getUserId(self, userId):
+        self.cur.execute("SELECT `user-id` FROM employinfo where `user-id`='%s'" % (userId))
+        row = self.cur.fetchone()
+        return row[0]
+
     def getPosition(self, userId):
         self.cur.execute("SELECT position FROM employinfo where `user-id` = '%s'" % (userId))
         row = self.cur.fetchone()
