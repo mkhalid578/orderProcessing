@@ -3,17 +3,49 @@
 	<head>
   	<title>Oder Processing Application </title>
 
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 		<link rel="stylesheet" href="/Users/vibhuti/Documents/spring 2017/softwareengI/design-project/css/navigation-bar.css">
+		<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
 
 
     <script>
 				$(document).ready(function(){
+
+          document.getElementById("digital-order-form").style.display ="block";
+
 					$('li a').click(function() {
     				$('li a').removeClass('active');
     				$(this).addClass('active');
+            var v_href = $(this).attr('href');
+
+            if (v_href == "#!digital-order-form"){
+              document.getElementById("digital-order-form").style.display ="block";
+              document.getElementById("order-data").style.display ="none";
+              document.getElementById("profile").style.display ="none";
+              document.getElementById("user-logout").style.display ="none";
+            } else if(v_href == "#!order-data") {
+              document.getElementById("digital-order-form").style.display ="none";
+              document.getElementById("order-data").style.display ="block";
+              document.getElementById("profile").style.display ="none";
+              document.getElementById("user-logout").style.display ="none";
+            } else if(v_href == "#!profile") {
+              document.getElementById("digital-order-form").style.display ="none";
+              document.getElementById("order-data").style.display ="none";
+              document.getElementById("profile").style.display ="block";
+              document.getElementById("user-logout").style.display ="none";
+            } else if(v_href == "#!user-logout") {
+              document.getElementById("digital-order-form").style.display ="none";
+              document.getElementById("order-data").style.display ="none";
+              document.getElementById("profile").style.display ="none";
+              document.getElementById("user-logout").style.display ="block";
+            }
+
+            
 					});
+
+          
 				});
     </script>
 
@@ -30,13 +62,129 @@
     						margin-left: auto;margin-right: auto;
     						border-style: inset; border-width: 10px;">
     <div>
-			<ul>
-  			<li><a class="active" href="#digital-order-form">Form</a></li>
-  			<li><a href="#order-data">OrderData</a></li>
-  			<li><a href="#profile">Profile</a></li>
-  			<li style="float:right"><a href="#user-logout" id="user-logout">Logout</a></li>
+			<ul class="tag-list">
+  			<li><a class="active" href="#!digital-order-form" id="digital-order-form-tag">Form</a></li>
+  			<li><a href="#!order-data" id="order-data-tag">OrderData</a></li>
+  			<li><a href="#!profile" id="profile-tag">Profile</a></li>
+  			<li style="float:right"><a href="#!user-logout" id="user-logout-tag">Logout</a></li>
 			</ul>
 		</div>
+
+
+    	<div class="tab-pane" id="digital-order-form" style="display: none;">
+        <form action="/action_page.php"
+            style="padding-left: 250px;padding-top: 25px;width: 400px; display: block;">
+        <fieldset>
+          <legend>Order information:</legend>
+          <br>
+
+          First Name:<br>
+              <input class="input-box" id="order-first-name" type="text" name="OrderFirstName" value=" ">
+          <br><br>
+          Last Name:<br>
+              <input class="input-box" id="order-last-name" type="text" name="OrderLastName" value=" ">
+          <br><br>
+          Email Id:<br>
+              <input class="input-box" id="order-email-id" type="text" name="OrderEmailId" value=" " style="width: 300px;" >
+          <br><br>
+          Employ position:<br>
+              <input class="input-box" id="order-employ-position" type="text" name="OrderEmployPosition" value=" ">
+          <br><br>
+          Department:<br>
+              <input class="input-box" id="order-department" type="text" name="OrderDepartment" value=" " style="width: 250px;" >
+          <br><br>
+
+          Item-Name:<br>
+              <input class="input-box" id="order-item-name" type="text" name="OrderItemName" value=" "  style="width: 350px;">
+          <br><br>
+          Item-Detail:<br>
+              <textarea id="order-item-detail" name="OrderItemDetail" rows="5" cols="20">
+              </textarea>
+          <br><br>
+          Item-Quentities:<br>
+              <input class="input-box" id="order-item-quentities" type="number" name="OrderItemQuentities" value=" ">
+          <br><br>
+          From-Where:<br>
+              <input class="input-box" id="order-from-where" type="text" name="OrderFromWhere" value=" " style="width: 350px;" >
+          <br><br>
+          Time-Period:<br>
+              <input class="input-box" id="order-time-period" type="text" name="OrderTimePeriod" value=" " style="width: 250px;" >
+          <br><br>
+          Use-Reason:<br>
+              <textarea id="order-use-reason" name="OrderUserReason" rows="5" cols="20">
+              </textarea>
+          <br><br>
+
+          <input id="submit-new-employ-account" type="submit" value="Submit">
+        </fieldset>
+        </form>
+      </div>
+
+    	<div class="tab-pane" id="order-data" style="display: none;" >...ContentB...</div>
+
+      <div class="tab-pane" id="profile" style="display: none;" >
+       <form action="/action_page.php"
+            style="padding-left: 50px;padding-top: 25px;width: 400px;">
+        <fieldset style="font-size: 14px;font-weight: bold;" >
+
+        <br>
+        <legend id="user-profile-blog">User Profile:</legend>
+       
+          <button type="button" style="margin-left: 350px;margin-top: -25px;">Edit</button>
+          <br> 
+          <br> 
+ 
+          Employ First Name:<br>
+              <input class="profile-input-box" id="current-employ-first-name" type="text" name="CurrentEmployFirstName" value="vibhuti" readonly>
+          <br><br>
+          Employ Last Name:<br>
+              <input class="profile-input-box" id="current-employ-last-name" type="text" name="CurrentEmployLastName" value=" "  readonly>
+          <br><br>
+          Employ Email Id:<br>
+              <input class="profile-input-box" id="current-employ-email-id" type="text" name="CurrentEmployEmailId" value=" " readonly>
+          <br><br>
+          Employ User Id:<br>
+              <input class="profile-input-box" id="current-employ-user-id" type="text" name="CurrentEmployUserId" value=" " readonly>
+          <br><br>
+          Employ Password: (1-10 char long)<br>
+              <input class="profile-input-box" id="current-employ-password" type="text" name="CurrentEmployPassword" value="******" readonly>
+          <br><br>
+
+          Employ Position:<br>
+              <input class="profile-input-box" id="current-employ-position" type="text" name="CurrentEmployPosition" value="" readonly>
+          <br><br>
+          Employ Department:<br>
+              <input class="profile-input-box" id="current-employ-department" type="text" name="CurrentEmployDepartment" value="" readonly>
+          <br><br>
+          Order Handler:<br>
+              <input id="current-employ-order-handler" type="radio" name="OrderHandler" value="true" readonly>True<br>
+              <input id="current-employ-order-handler-not" type="radio" checked name="OrderHandlerNot" value="false" readonly>False<br>
+          <br><br>
+
+          <input id="submit-current-employ-account" type="submit" value="Submit" disabled>
+
+        </fieldset>
+       </form>
+		  </div>
+
+
+
+    	<div class="tab-pane" id="user-logout" style="display: none;" >
+      		<h1 class="logout-containt" >
+      			Log Out...</br>
+    			</h1>			
+      		<h3 class="logout-containt" >
+      			Thank you, Hope you get all answer that you wanted!</br>
+    			</h3>			
+      		<h2 class="logout-containt" >
+      			Have A Nice Day!</br></br></br>
+    			</h2>
+      		<h4>
+      			Click Here to Log in again!</br>
+    			</h4>
+			</div>
+
+
 
 	</body>
 
