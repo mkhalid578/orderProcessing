@@ -30,16 +30,16 @@
 		  <p class=error style="padding-left: 250px;"><strong>Error:</strong> {{ error }} </p>
 		  {% endif %}
 
-	{% endblock %}
+
 
 			<hr style="width: 500px;color: brown;height: 5px; margin-left: 200px; " >
 
-			<h1 style="padding-left: 200px;font-size: unset;color: steelblue;" > Register New Employee Account </h1>
-			<button id="bt-new-employ-account" type="button" onclick="alert('Hello world!')"
-					style="font-size: inherit; margin-left: 250px; display: block;" >
-					 		Create
-			</button>
+			<h1 style="padding-left: 200px;font-size: unset;color: steelblue;" >
+				<a href="{{url_for('registerUser')}}"> New Employee Account </a>
+			</h1>
   		</div>
+
+	{% endblock %}
 	</body>
 </html>
 

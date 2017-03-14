@@ -26,32 +26,15 @@
 			</form>
 			<hr style="width: 500px;color: brown;height: 5px; margin-left: 200px; " >
 
+			{% if error %}
+		  <p class=error style="padding-left: 250px;"><strong>Error:</strong> {{ error }} </p>
+		  {% endif %}
+
 			{% endblock %}
 
 			<h1 style="padding-left: 200px;font-size: unset;color: steelblue;" >
-				Register New Company Account
+				<a href="{{url_for('registerCompany')}}"> New Company Account</a>
 			</h1>
-			<button id="bt-new-company-account" type="button" onclick="alert('Hello world!')"
-    	        style="font-size: inherit; margin-left: 250px;" >
-					 		Create</button>
-		
-			<form action="/action_page.php" style="padding-left: 250px;padding-top: 25px;width: 400px; display: none;">
-  				<fieldset>
-	      			<label id="incorrect-new-company-userid" style="display: none;" >
-			  			<br>Please, correct your user-id. user-id should not have more than 500 char.<br>
-		  			</label>
-	      			<label id="incorrect-new-company-password" style="display: none;" >
-			  			<br>Please, correct your password. password should not have more than 12 char.<br>
-		  			</label>
-    				<br>
-					<legend>Company information:</legend>
-					<input id="new-company-user-id" type="text" placeholder="Company User ID" name="NewCompanyUserId" value=" ">
-    				<br><br>
-  	  				<input id="new-company-password" type="text" placeholder="Password" name="NewCompanyPassword" value="">
-
-    				<input id="submit-new-company-account" type="submit" value="Submit">
-  				</fieldset>
-			</form>
   		</div>
 	</body>
 </html>
