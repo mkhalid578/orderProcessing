@@ -103,6 +103,20 @@
 * We agreed that the backend to the User Submission UI was not feasibile for this sprint
 * We will tackle this story in a future sprint
 
+#### Open/ Closed Stories
+
+| Stories                                  | Assignee         | Estimate (Hours) | Status |
+|------------------------------------------|------------------|------------------|--------|
+| Create New Order Submission UI           | Vibhuti Patel    | 4                | Open |
+| Add backend to User Submission UI        | Michael Bertucci | 5                | Closed |
+| Create User Login Page                   | Vibhuti Patel    | 2                | Closed |
+| Login Backend                            | Muhammed Khalid  | 4                | Closed |
+| Create UI showing list of orders         | Vibhuti Patel    | 4                | Open |
+| Create Python SQL API                    | Muhammed Khalid  | 3                | Closed |
+| Find Hosting Platform for mySQL Database | Muhammed Khalid  | 1                | Closed |
+| Create a mySQL Database                  | Vibhuti Patel    | 2                | Closed |
+
+
 ## Sprint Retrospective | Location: TBA | 03/14
 
  
