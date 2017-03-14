@@ -91,4 +91,18 @@
    * Hosting for mySQL Database - closed
    * Create mySQL Database - closed
    * Create Python SQL API - closed
+   
+## Meeting #7 | Location: Online | 03/13
+* ScrumMaster asked each member on the progress of their stories
+* Vibhuti was able to complete the User Login Page along with Company Login page. 
+* 2 stories have been closed
+  * Create User Login Page - closed
+  * Login Backend          - closed
+  
+* Also we discussed the issue of feasibility in one of our features
+* We agreed that the backend to the User Submission UI was not feasibile for this sprint
+* We will tackle this story in a future sprint
+
+## Sprint Retrospective | Location: TBA | 03/14
+
  
