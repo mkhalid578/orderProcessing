@@ -17,6 +17,16 @@
 # Sprint 1
 ## Backlog
 
+####Roles
+
+| Member | Role|
+|--------|------|
+| Michael Bertucci | Senior SW Engineer |
+| Vibhuti Patel | Principal SW Engineer and Product Owner |
+| Muhammed Khalid | ScrumMaster and SW Engineer |
+
+
+
 | Stories                                  |
 | ------------------------------------     |
 | Create New Order Submission UI           | 
@@ -72,5 +82,13 @@
  * No issues thus far 
  * Posibility of meeting on campus tomorrow to discuss possible issues
 
-## Meeting #6 
-* TBA
+## Meeting #6 | Location: Online | 03/12
+ * Talked about our progress regarding the sprints 
+ * An issue came up regarding our feasibility report
+ * From our discussion, we figured we need to restructure our product backlog
+ * Some items from this sprint are not feasibile and must be moved to the next sprint
+ * 3 stories have been closed 
+   * Hosting for mySQL Database - closed
+   * Create mySQL Database - closed
+   * Create Python SQL API - closed
+ 
