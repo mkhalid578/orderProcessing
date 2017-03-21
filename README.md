@@ -33,7 +33,7 @@
  ##### Go to the FlaskApp directory 
  
  ```linux
- cd sw_eng_project/flask/FlaskApp
+ cd sw_eng_project/flask/flaskApp
  ```
  ##### Run the web app as such:
  
