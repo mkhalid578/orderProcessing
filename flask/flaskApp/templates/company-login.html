@@ -1,0 +1,41 @@
+
+<html>
+	<head>
+  	<title>Oder Processing Application </title>
+	</head>
+
+	<body>
+
+  	<h1 style="color: chocolate;color-adjust: exact;">
+			<br>Order Processing System</br>
+		</h1>
+		<hr style="color: brown;width: auto;  display: block;
+    						margin-top: 0.5em;margin-bottom: 0.5em;
+    						margin-left: auto;margin-right: auto;
+    						border-style: inset; border-width: 10px;">
+
+	{% block body %}
+
+    <h1 style="padding-left: 250px;">Company Login</h1>
+
+		<div id="company-login">
+			<form action="" style="padding-left: 250px;" method="post">
+				<input id="company-user-id" type="text" placeholder="Company User ID" name="CompanyUserId" value="{{request.form.CompanyUserId}}"><br><br>
+				<input id="company-password" type="text" placeholder="Password" name="CompanyPassword" value="{{request.form.CompanyPassword}}"><br><br>
+				<input type="submit" value="Login">
+			</form>
+			<hr style="width: 500px;color: brown;height: 5px; margin-left: 200px; " >
+
+			{% if error %}
+		  <p class=error style="padding-left: 250px;"><strong>Error:</strong> {{ error }} </p>
+		  {% endif %}
+
+			{% endblock %}
+
+			<h1 style="padding-left: 200px;font-size: unset;color: steelblue;" >
+				<a href="{{url_for('registerCompany')}}"> New Company Account</a>
+			</h1>
+  		</div>
+	</body>
+</html>
+
