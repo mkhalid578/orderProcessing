@@ -1,0 +1,46 @@
+
+<html>
+	<head>
+  	<title>Oder Processing Application </title>
+
+
+
+		<link rel="stylesheet" href="../static/css/navigation-bar.css">
+
+
+    <script>
+				$(document).ready(function(){
+					$('li a').click(function() {
+    				$('li a').removeClass('active');
+    				$(this).addClass('active');
+					});
+				});
+    </script>
+
+
+	</head>
+
+	<body>
+
+  	<h1 style="color: chocolate;color-adjust: exact;">
+			Order Processing System</br>
+		</h1>
+		<hr style="color: brown;width: auto;  display: block;
+    						margin-top: 0.5em;margin-bottom: 0.5em;
+    						margin-left: auto;margin-right: auto;
+    						border-style: inset; border-width: 10px;">
+    <div>
+			<ul>
+  			<li><a class="active" href="#digital-order-form">Form</a></li>
+  			<li><a href="#order-data">OrderData</a></li>
+  			<li><a href="#profile">Profile</a></li>
+  			<li style="float:right"><a href="#user-logout" id="user-logout">Logout</a></li>
+			</ul>
+		</div>
+
+	</body>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</html>
+
