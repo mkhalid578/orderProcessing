@@ -24,6 +24,12 @@
  sudo pip install flask
  ``` 
  
+ ##### The Flask Login Library 
+ 
+ ```linux
+ sudo pip install flask_login
+ ``` 
+ 
  ##### The pymsql library 
  
  ```linux
