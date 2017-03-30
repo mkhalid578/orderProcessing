@@ -118,5 +118,26 @@
 
 
 ## Sprint Retrospective | Location: TBA | 03/14
+* Discussed in Class and submitted prototype report 
 
- 
+# Sprint 2
+## Backlog
+
+## Meeting 1 | Sprint Planning 
+#### Location: Lyndon Library 03/28
+* Went back to our product backlog and moved to this sprint
+* Also added stories from previous sprint
+* Those stories have been rolled over. Hopefully, they can be accomplished in this sprint 
+* Broke up tasks and assigned to each respective team member best capable of performing them  
+* Also added estimates to each story (in hours). 
+* Final Sprint2 Backlog: 
+
+| Stories                                                     | Assignee         | Estimate (Hours) | Status |
+|-------------------------------------------------------------|------------------|------------------|--------|
+| Create UI allowing user to modify profile information       | Vibhuti Patel    | 2                | Open |
+| Give Edit Permissions for Orders depending on User Type     | Vibhuti Patel    | 1                | Open |
+| Add backend to User Submission UI                           | Muhammed Khalid  | 5                | Open |
+| Create UI showing list of orders                            | Vibhuti Patel    | 5                | Open |
+| Modify Login UI                                             | Muhammed Khalid  | 4                | Open |
+| Create User Login Sessions                                  | Muhammed Khalid  | 5                | Open |
+
