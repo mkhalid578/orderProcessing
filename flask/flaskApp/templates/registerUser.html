@@ -1,43 +1,103 @@
 <html>
-	<head>
-  	    <title>Order Processing Application </title>
-	</head>
-
-	<body>
-
-  	<h1 style="color: chocolate;color-adjust: exact;">
-			<br>Order Processing System</br>
+  <head>
+    <title>Order Processing Application </title>
+    <link href="../static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  
+  <body style="background-color:#ffe0b2;">
+    
+    <h1 style="color: chocolate;color-adjust: exact; padding-left:250px;">
+      Order Processing System<br>
     </h1>
-		<hr style="color: brown;width: auto;  display: block;
-    						margin-top: 0.5em;margin-bottom: 0.5em;
-    						margin-left: auto;margin-right: auto;
-    						border-style: inset; border-width: 10px;">
-
-	{% block body %}
-
-    <h1 style="padding-left: 250px;">Register New Employee</h1>
-
-		<div id="company-login">
-			<form action="" style="padding-left: 250px;" method="post">
-				<input id="first-name" type="text" placeholder="First Name" name="first" value="{{request.form.first}}"><br><br>
-				<input id="last-name" type="text" placeholder="Last Name" name="last" value="{{request.form.last}}"><br><br>
-                <input id="email-id" type="text" placeholder="Email" name="email" value="{{request.form.email}}"><br><br>
-                <input id="user-id" type="text" placeholder="User ID" name="userId" value="{{request.form.userId}}"><br><br>
-                <input id="password" type="text" placeholder="Password" name="password" value="{{request.form.password}}"><br><br>
-                <input id="position" type="text" placeholder="Position" name="position" value="{{request.form.position}}"><br><br>
-                <input id="department" type="text" placeholder="Department" name="dept" value="{{request.form.dept}}"><br><br>
-                <input id="companyName" type="text" placeholder="Company Name" name="company" value="{{request.form.company}}"><br><br>
-                <input id="orderHandler" type="text" placeholder="Order Handler" name="orderHandler" value="{{request.form.orderHandler}}"><br><br>
-				<input type="submit" value="Register Employee"> <button><a style="text-decoration:none;" href="{{url_for('login')}}">Already have an Account?</a></button>
-			</form>
-
-            {% if error %}
-		  <p class=error style="padding-left: 250px;"><strong>Error:</strong> {{ error }} </p>
-		  {% endif %}
-
-			<hr style="width: 500px;color: brown;height: 5px; margin-left: 200px; " >
-
-			{% endblock %}
-        </div>
-    </body>
+    
+    {% block body %}
+    
+    
+    <h5 style="padding-left:265px;"> Employee Login </h5>
+    
+    <div id="company-login" style="padding-left:250px;">
+      <div class="row">
+    	<form class="col s12" method="post">
+      	  <div class="row">
+       	    <div class="input-field col s4">
+              <input id="first_name" type="text" class="validate" name="first" value="{{request.form.first}}">
+              <label for="first_name">First Name</label>
+       	    </div>
+	    <div class="input-field col s4">
+              <input id="last_name" type="text" class="validate" name="last" value="{{request.form.last}}">
+              <label for="last_name">Last Name</label>
+       	    </div>
+      	  </div>
+	  <div class="row">
+       	    <div class="input-field col s4">
+              <input id="email" type="text" class="validate" name="email" value="{{request.form.email}}">
+              <label for="email">Email</label>
+            </div>
+      	  </div>
+	  <div class="row">
+       	    <div class="input-field col s4">
+              <input id="userId" type="text" class="validate" name="userId" value="{{request.form.userId}}">
+              <label for="userId">Username</label>
+            </div>
+      	  </div>
+	  <div class="row">
+       	    <div class="input-field col s4">
+              <input id="password" type="password" class="validate" name="password" value="{{request.form.password}}">
+              <label for="password">Password</label>
+            </div>
+      	  </div>
+	  <div class="row">
+       	    <div class="input-field col s4">
+              <input id="position" type="text" class="validate" name="position" value="{{request.form.position}}">
+              <label for="password">Position</label>
+            </div>
+	  </div>
+	  <div class="row">
+       	    <div class="input-field col s4">
+              <input id="department" type="text" class="validate" name="dept" value="{{request.form.dept}}">
+              <label for="password">Department</label>
+            </div>
+	  </div>
+	  <div class="row">
+       	    <div class="input-field col s4">
+              <input id="companyName" type="text" class="validate" name="company" value="{{request.form.company}}">
+              <label for="password">Password</label>
+            </div>
+	  </div>
+	  
+	  <div class="row">
+       	    <div class="input-field col s4">
+	      <input disabled id="disabled" type="text" class="validate">
+              <label for="disabled">Order Handler</label>
+            </div>
+	  </div>
+	  <div class="row">
+	    <input type="checkbox" id="yes" />
+      	    <label for="yes">Yes</label>
+	    
+	  </div>
+	  <div class="row">
+	    <input type="checkbox" id="no" />
+      				<label for="no">No</label>
+	  </div>
+	  <button class="btn waves-effect waves-light" type="submit" name="action"> Register Account </button>
+	  
+	  <button class="btn waves-effect waves-light" type="submit" name="action">
+	    <a style="text-decoration:none;" href="{{url_for('login')}}"> Already Registered?</a>
+	  </button>
+	  
+	  {% if error %}
+	  <p class=error><strong>Error:</strong> {{ error }} </p>
+	  {% endif %}
+	  
+	</form>
+      </div>
+    </div>
+    
+    {% endblock %}
+  </body>
+  
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="../static/js/materialize.js"></script>
 </html>
