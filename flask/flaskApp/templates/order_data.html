@@ -1,0 +1,60 @@
+
+<div class="tab-pane order-table" id="order-data" style="display: none;" >
+			<table id="placed-order-table" class="display"
+                 width="100%" style="text-align: center;"></table>
+</div>
+
+<div id="OrderItemDialog" class="flora" title="Order Item"  hidden="hidden">
+			<br>
+      <label id="order-person-detail-dialogtext"
+             style="white-space: pre-wrap; text-align: center; color: brown; font-size: larger;"></label><br>
+
+      <p style="white-space: pre-wrap; color: brown; font-size: larger;"><b>Detail:</b></p>
+      <label id="order-item-detail-dialogtext" style="white-space: pre-wrap;
+                 font-size: large; font-weight: bold; color: darkkhaki;"></label>
+
+      <p style="white-space: pre-wrap; color: brown; font-size: larger;"><b>Order-Status:</b></p>
+      <select id="order-status-detail" style="margin-left: 200PX; color: brown;" disabled="true">
+          <option value="approval-pending">Approval Pending</option>
+          <option value="approved">Approved</option>
+          <option value="order-placed">Order Placed</option>
+          <option value="order-arrived">Order Arrived</option>
+      </select>
+      <br><br>
+
+      <p style="white-space: pre-wrap; color: brown; font-size: larger;"><b>Placed Order Detail:</b></p>
+      <div id="placed-order-item-detail-dialogtext" style="
+                 font-weight: bold; color: darkkhaki;">
+      		<form action="/action_page.php">
+        		<fieldset>
+          		Shipment-Company:
+            		<input class="input-box" id="item-detail-shipment-company" type="text"
+                   		name="item-detail-shipment-company" value=" "
+                   		style="margin-left: 100px;" /><br><br>
+          		Tracking-Number:
+            		<input class="input-box" id="item-detail-tracking-number" type="text"
+                		  name="item-detail-tracking-number" value=" "
+                   		style="margin-left: 116px;" /><br><br>
+          		Tracking-Website:
+            		<input class="input-box" id="item-detail-tracking-website" type="text"
+                   		name="item-detail-tracking-website" value=" "
+                   		style="margin-left: 116px;" /><br><br>
+          		Expected Arriving Date:
+            		<input class="input-box" id="item-detail-expected-arriving-date" type="date"
+                   		name="item-detail-expected-arriving-date" value=" "
+                   		style="margin-left: 100px;" /><br><br>
+          		Arrived Date:
+            		<input class="input-box" id="item-detail-arrived-date" type="date"
+                   		name="item-detail-arrived-date" value=" "
+                   		style="margin-left: 100px;" /><br><br>
+         		</fieldset>
+      		</form>
+      </div><br>
+</div>
+
+
+
+
+
+
+

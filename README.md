@@ -1,6 +1,62 @@
 # SW Engineering Project
 ## Order Processing Application
 
+## How to Run Our App
+* A few things:
+  * Our app is currently locally hosted
+  * We have only hosted our database on Google Cloud
+
+ ##### You can clone our master branch to your machine:
+ ```linux
+ git clone https://github.com/mkhalid578/sw_eng_project.git
+ ```
+ 
+ #### A Few Important Dependencies 
+ 
+ ##### You will need Python installed on your machine (Python 2.7 recommended)
+ 
+ ```linux
+ sudo apt-get install python
+ ```
+ ##### The Flask extension 
+ 
+ ```linux
+ sudo pip install flask
+ ``` 
+ 
+ ##### The Flask Login Library 
+ 
+ ```linux
+ sudo pip install flask_login
+ ``` 
+ 
+ ##### The pymsql library 
+ 
+ ```linux
+ sudo pip install pymysql
+ ```
+ 
+ ##### Go to the FlaskApp directory 
+ 
+ ```linux
+ cd sw_eng_project/flask/flaskApp
+ ```
+ ##### Run the web app as such:
+ 
+ ```python
+ python app.py
+ ```
+ ##### You will be prompted with a message letting you know the server is running locally
+ 
+ ```linux
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ ```
+ ##### Open a web browser and type or paste the following into your address bar:
+ 
+ ```linux
+ http://127.0.0.1:5000/compLogin
+ ```
+
 ## Scrum/Agile Environment
 * In this project we will be using Agile/Scrum Methodology
 * We will be using ZenHub as a tool to help us implement an Agile environment

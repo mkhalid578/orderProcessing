@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+  {% include '_header.html' %}
+	<body>
+
+  	<h1 style="color: chocolate;color-adjust: exact;">
+			Order Processing System</br>
+		</h1>
+		<hr style="color: brown;width: auto;  display: block;
+    						margin-top: 0.5em;margin-bottom: 0.5em;
+    						margin-left: auto;margin-right: auto;
+    						border-style: inset; border-width: 10px;">
+    <div>
+			<ul class="tag-list">
+  			<li><a class="active" href="#!digital-order-form" id="digital-order-form-tag">Form</a></li>
+  			<li><a href="#!order-data" id="order-data-tag">OrderData</a></li>
+  			<li><a href="#!profile" id="profile-tag">Profile</a></li>
+  			<li style="float:right"><a href="#!user-logout" id="user-logout-tag">Logout</a></li>
+			</ul>
+		</div>
+
+    {% include 'digital_order_form.html' %}
+    {% include 'order_data.html' %}
+    {% include 'profile_data.html' %}
+    {% include 'user_logout.html' %}
+
+
+    <script type="text/javascript" src="../static/js/order-data-list.js"></script>
+  
+	</body>
+</html>
+
