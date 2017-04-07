@@ -1,69 +1,32 @@
-<html>
-  <head>
-    <title>Order Processing Application </title>
-    <meta charset="utf-8">
-  		<meta name="viewport" content="width=device-width, initial-scale=1">
-  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" href="../static/css/navigation-bar.css">
-	    <link href="../static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  </head>
+<!DOCTYPE html>
+  {% include '_header.html' %}
+	<body>
+
+  	<h1 style="color: chocolate;color-adjust: exact;">
+			Order Processing System</br>
+		</h1>
+		<hr style="color: brown;width: auto;  display: block;
+    						margin-top: 0.5em;margin-bottom: 0.5em;
+    						margin-left: auto;margin-right: auto;
+    						border-style: inset; border-width: 10px;">
+    <div>
+			<ul class="tag-list">
+  			<li><a class="active" href="#!digital-order-form" id="digital-order-form-tag">Form</a></li>
+  			<li><a href="#!order-data" id="order-data-tag">OrderData</a></li>
+  			<li><a href="#!profile" id="profile-tag">Profile</a></li>
+  			<li style="float:right"><a href="#!user-logout" id="user-logout-tag">Logout</a></li>
+			</ul>
+		</div>
+
+    {% include 'digital_order_form.html' %}
+    {% include 'order_data.html' %}
+    {% include 'profile_data.html' %}
+    {% include 'user_logout.html' %}
+
+
+    <script type="text/javascript" src="../static/js/order-data-list.js"></script>
   
-  <body>
-    
-    <h1 style="color: chocolate;color-adjust: exact;">
-      Order Processing System</br>
-    </h1>
-    
-
-  <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn" href="#modal1">Modal</a>
-
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-          <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-          </div>
-          <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Disagree</a>
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-          </div>
-        </div>
-
-	<!--
-    <ul>
-      <li><a class="active" href="#digital-order-form">Form</a></li>
-      <li><a href="#order-data">OrderData</a></li>
-  	  <li><a href="#profile">Profile</a></li>
-      <li style="float:right"><a href="#user-logout" id="user-logout">Logout</a></li>
-    </ul>
-    -->
-  </body>
-
-
- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="../static/js/materialize.min.js"></script>
-  <script>
-	   $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal').modal({
-      dismissible: true, // Modal can be dismissed by clicking outside of the modal
-      opacity: .5, // Opacity of modal background
-      inDuration: 300, // Transition in duration
-      outDuration: 200, // Transition out duration
-      startingTop: '4%', // Starting top style attribute
-      endingTop: '10%', // Ending top style attribute
-      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-        alert("Ready");
-        console.log(modal, trigger);
-      },
-      complete: function() { alert('Closed'); } // Callback for Modal close
-    }
-  );
-  });
-  </script>
-  
+	</body>
 </html>
 
