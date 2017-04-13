@@ -28,7 +28,8 @@ $(document).ready(function(){
               	document.getElementById("order-data").style.display ="none";
               	document.getElementById("profile").style.display ="block";
               	document.getElementById("user-logout").style.display ="none";
-
+                UpdateProfileData();
+ 
             } else if(v_href == "#!user-logout") {
 
               	document.getElementById("digital-order-form").style.display ="none";
@@ -186,16 +187,92 @@ $(document).ready(function(){
 
            
        // profile data
+
+           function UpdateProfileData() {
+                // Update data about logged user data from database
+                $.ajax({
+											    type : "GET",
+											    url : "/load_profile_data",
+											    success: function(result) {
+											        console.log("vibhuti");
+											        console.log(result);
+                              var obj = JSON.parse(result)
+                              if ((obj.status) == 'OK'){
+                              		$("#current-employ-first-name").val(obj.firstName) 
+                              		$("#current-employ-last-name").val(obj.lastName) 
+                              		$("#current-employ-email-id").val(obj.email) 
+                              		$("#current-employ-user-id").val(obj.userId) 
+                              		$("#current-employ-password").val(obj.password) 
+                              		$("#current-employ-position").val(obj.position) 
+                              		$("#current-employ-department").val(obj.deptarment)
+                              } else {
+                                 console.log("Logged In user data is not found!")
+                              		$("#current-employ-first-name").val(" ") 
+                              		$("#current-employ-last-name").val(" ") 
+                              		$("#current-employ-email-id").val(" ") 
+                              		$("#current-employ-user-id").val(" ") 
+                              		$("#current-employ-password").val(" ") 
+                              		$("#current-employ-position").val(" ") 
+                              		$("#current-employ-department").val(" ")
+                              } 
+											    },
+                          error: function(error) {
+                              console.log(error);
+                          }
+								});
+
+           }
+
         document.getElementById("allow-profile-edit-bt").onclick = function() {AllowProfileEditing()};
            function AllowProfileEditing() {
                var profile_data_inputs = document.getElementById('profile').getElementsByTagName('input');
  	              for (i = 0; i < profile_data_inputs.length; i++) {
                     profile_data_inputs[i].removeAttribute("readonly");
 							  }
-                document.getElementById("submit-current-employ-account").disabled = false;
+                document.getElementById("current-employ-order-handler").disabled = false;
+                document.getElementById("current-employ-manager").disabled = false;
+                document.getElementById("current-employ-worker").disabled = false;
+                document.getElementById("submit-current-employ-account-btn").disabled = false;
+
            }
 
 
+        document.getElementById("submit-current-employ-account-btn").onclick = function() {UpdateProfileEditing()};
+           function UpdateProfileEditing() {
+
+								console.log("vibhuti submit bt");
+                /* 
+                $.ajax({
+											    type : "POST",
+											    url : "/update_profile_data",
+											    success: function(result) {
+											        console.log("vibhuti");
+											        console.log(result);
+                              var obj = JSON.parse(result)
+											        console.log(obj.status);
+                              if ((obj.status) == 'OK'){
+                              		$("#current-employ-first-name").val(obj.firstName) 
+                              		$("#current-employ-last-name").val(obj.lastName) 
+                              		$("#current-employ-email-id").val(obj.email) 
+                              		$("#current-employ-user-id").val(obj.userId) 
+                              		$("#current-employ-password").val(obj.password) 
+                              		$("#current-employ-position").val(obj.position) 
+                              		$("#current-employ-department").val(obj.deptarment)
+                              } else {
+                                 console.log("Logged In user data is not found!")
+                                 
+                              } 
+											    },
+                          error: function(error) {
+                              console.log(error);
+                          }
+								});
+                */
+
+
+
+
+        }
 
 });
 
