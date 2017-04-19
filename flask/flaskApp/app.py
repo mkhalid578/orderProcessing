@@ -1,9 +1,36 @@
 from flask import Flask, render_template, request, session, flash, url_for, redirect
 from orderProcessDB import EmployInfo, Company
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_sqlalchemy import SQLAlchemy
+
 import json
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:bane786@104.196.156.219/order_processing_app'
+app.config['SECRETY_KEY'] = 'secret'
+
+db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+class company(db.Model):
+    __tablename__ = 'company'
+    name = db.Column(db.String(500), primary_key=True)
+    password = db.Column(db.String(12), unique=True)
+
+class employee(db.Model):
+    __tablename__ = 'employinfo'
+    first_name = db.Column(db.String(100), unique=True)
+    last_name = db.Column(db.String(100), unique=True)
+    email_id = db.Column(db.String(100), unique=True)
+    user_id = db.Column(db.String(45), primary_key=True)
+    password = db.Column(db.String(10), unique=True)
+    position = db.Column(db.String(45), unique=True)
+    department = db.Column(db.String(100), unique=True)
+    company_name = db.Column(db.String(500), unique=True)
+    order_authority = db.Column(db.String(200), unique=True)
+
+
 
 global_login_user_id = " "
 
@@ -12,17 +39,23 @@ def login():
     db = EmployInfo()
     error = None
     if request.method == 'POST':
-        if request.form['username'] != db.getUserId(request.form['username']):
-            error = 'Invalid Username'
-        elif request.form['password'] != str(db.getPassword(request.form['username'])):
-            error = 'Invalid Password'
-        else:
-            global global_login_user_id # needed to modify global copy
-            global_login_user_id = request.form['username']
+        try:
+            if request.form['username'] != db.getUserId(request.form['username']):
+                error = 'Invalid Username'
+            elif request.form['password'] != str(db.getPassword(request.form['username'])):
+                error = 'Invalid Password'
+            else:
+                global global_login_user_id # needed to modify global copy
+                global_login_user_id = request.form['username']
 
-            print request.form['username']
-            print request.form['password']
-            return redirect(url_for('placeOrder'))
+                print request.form['username']
+                print request.form['password']
+
+                return redirect(url_for('placeOrder'))
+
+        except TypeError:
+            error  = 'Invalid Username or Password'
+
     return render_template('employ-login.html', error=error)
 
 @app.route('/compLogin', methods=['GET', 'POST'])
@@ -41,6 +74,7 @@ def companyLogin():
     return render_template('company-login.html', error=error)
 
 @app.route('/processOrder')
+@login_required
 def placeOrder():
     return render_template('processing-window.html')
 
@@ -62,13 +96,13 @@ def load_profile_data():
     		dept = db.getDept(global_login_user_id)
     		company = db.getCompanyName(global_login_user_id)
     		#orderHandler = db.getOrderHandler(global_login_user_id)
-    		orderHandler = 1 
-    
+    		orderHandler = 1
+
     		return json.dumps({'status':'OK', 'firstName':firstName, 'lastName':lastName,
                        'email':email, 'userId':userId, 'password':password, 'position':position,
                        'deptarment':dept, 'company':company ,'orderHandler':orderHandler});
 
-    else: 
+    else:
     		return json.dumps({'status':'NOT-OK'});
 
 @app.route('/update_profile_data', methods=['GET', 'POST'])

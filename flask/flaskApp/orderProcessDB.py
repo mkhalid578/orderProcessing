@@ -3,7 +3,7 @@
 import pymysql as sql
 
 class EmployInfo(object):
-    
+
     def __init__(self):
         self.user = 'root'
         self.password = 'bane786'
@@ -13,71 +13,71 @@ class EmployInfo(object):
                                          self.user,
                                          self.password,
                                          self.db)
-        
+
         self.cur = self.sqlConnection.cursor()
 
     def getUserId(self, userId):
-        self.cur.execute("SELECT `user-id` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `user_id` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
 
     def getPosition(self, userId):
-        self.cur.execute("SELECT position FROM employinfo where `user-id` = '%s'" % (userId))
+        self.cur.execute("SELECT position FROM employinfo where `user_id` = '%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
 
     def getFirstName(self, userId):
-        self.cur.execute("SELECT `first-name` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `first_name` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
 
     def getLastName(self, userId):
-        self.cur.execute("SELECT `last-name` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `last_name` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
 
 
     def getEmailId(self, userId):
-        self.cur.execute("SELECT `email-id` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `email_id` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
-    
+
     def getPassword(self, userId):
-        self.cur.execute("SELECT `password` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `password` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
-    
+
     def getDept(self, userId):
-        self.cur.execute("SELECT `department` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `department` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
-    
+
     def getCompanyName(self, userId):
-        self.cur.execute("SELECT `company-name` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `company_name` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
-    
+
     def getOrderHandler(self, userId):
-        self.cur.execute("SELECT `order-handler` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `order_authority` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
 
     def insertUser(self, firstName, lastName, email, userId, password,
                        position, department, companyName, orderHandler):
-        self.cur.execute("""INSERT INTO employinfo (`first-name`,`last-name`, `email-id`, `user-id`, `password`,
-                            `position`, `department`, `company-name`, `order-handler`)
+        self.cur.execute("""INSERT INTO employinfo (`first_name`,`last_name`, `email_id`, `user_id`, `password`,
+                            `position`, `department`, `company_name`, `order_authority`)
                             VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%d');"""
                          % (firstName, lastName, email, userId, password, position, department,
                             companyName, orderHandler))
         self.sqlConnection.commit()
 
-    
+
     def __repr__(self):
         return '[%s, %s]' % (self.host, self.db)
 
 
 class Company(object):
-    
+
     def __init__(self):
         self.user = 'root'
         self.password = 'bane786'
@@ -87,7 +87,7 @@ class Company(object):
                                          self.user,
                                          self.password,
                                          self.db)
-        
+
         self.cur = self.sqlConnection.cursor()
 
     def getName(self, name):
@@ -241,4 +241,3 @@ class ItemOrder(object):
 
         self.cur.execute(sql)
         self.sqlConnection.commit()
-
