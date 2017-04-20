@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, session, flash, url_for, redirect
-from orderProcessDB import EmployInfo, Company
+from orderProcessDB import EmployInfo, Company, ItemOrder
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import json
 
 app = Flask(__name__)
 
 global_login_user_id = " "
+global_company_name = " "
 
 @app.route('/elogin', methods=['GET', 'POST'])
 def login():
@@ -35,6 +36,9 @@ def companyLogin():
         elif request.form['CompanyPassword'] != db.getPassword(request.form['CompanyUserId']):
             error = 'Invalid Password'
         else:
+            global global_company_name # needed to modify global copy
+            global_company_name = request.form['CompanyUserId']
+
             print request.form['CompanyUserId']
             print request.form['CompanyPassword']
             return redirect(url_for('login'))
@@ -53,20 +57,39 @@ def UserLogout():
 def load_profile_data():
     db = EmployInfo()
     if global_login_user_id != " ":
+        firstName = db.getFirstName(global_login_user_id)
+        lastName = db.getLastName(global_login_user_id)
+        email = db.getEmailId(global_login_user_id)
+        userId = db.getUserId(global_login_user_id)
+        password = str(db.getPassword(global_login_user_id))
+        position = db.getPosition(global_login_user_id)
+        dept = db.getDept(global_login_user_id)
+        order_authority = db.getorderAuthority(global_login_user_id)
+        company = db.getCompanyName(global_login_user_id)
+ 
+       	return json.dumps({'status':'OK', 'firstName':firstName, 'lastName':lastName,
+                       'email':email, 'userId':userId, 'password':password, 'position':position,
+                       'deptarment':dept, 'company':company ,'order_authority': order_authority});
+
+    else: 
+    		return json.dumps({'status':'NOT-OK'});
+
+
+@app.route('/load_profile_data_for_form', methods=['GET', 'POST'])
+def load_profile_data_for_form():
+    db = EmployInfo()
+    if global_login_user_id != " ":
     		firstName = db.getFirstName(global_login_user_id)
     		lastName = db.getLastName(global_login_user_id)
     		email = db.getEmailId(global_login_user_id)
     		userId = db.getUserId(global_login_user_id)
-    		password = str(db.getPassword(global_login_user_id))
     		position = db.getPosition(global_login_user_id)
     		dept = db.getDept(global_login_user_id)
     		company = db.getCompanyName(global_login_user_id)
-    		#orderHandler = db.getOrderHandler(global_login_user_id)
-    		orderHandler = 1 
     
     		return json.dumps({'status':'OK', 'firstName':firstName, 'lastName':lastName,
-                       'email':email, 'userId':userId, 'password':password, 'position':position,
-                       'deptarment':dept, 'company':company ,'orderHandler':orderHandler});
+                       'email':email, 'userId':userId, 'position':position,
+                       'deptarment':dept, 'company':company });
 
     else: 
     		return json.dumps({'status':'NOT-OK'});
@@ -75,8 +98,50 @@ def load_profile_data():
 def update_profile_data():
     return "hi"
 
+@app.route('/load_new_order_data', methods=['GET', 'POST'])
+def load_new_order_data():
+    new_order_data = request.args.get('key')
+    db_new_order_data = json.loads(new_order_data)
 
+    db = ItemOrder()
+    first_name = db_new_order_data['order-first-name']
+    last_name = db_new_order_data['order-last-name']
+    email_id = db_new_order_data['order-email-id']
+    employ = db_new_order_data['order-employ-position']
+    department = db_new_order_data['order-department']
+    item_name = db_new_order_data['order-item-name']
+    item_detail = db_new_order_data['order-item-detail']
+    item_quentities = db_new_order_data['order-item-quentities']
+    from_where = db_new_order_data['order-from-where']
+    time_period = db_new_order_data['order-time-period']
+    use_reason = db_new_order_data['order-use-reason']
+    company_name = global_company_name    
+    db.insert_new_order(first_name,last_name,email_id,employ,department,item_name,item_detail,
+                        item_quentities,from_where,time_period,use_reason,company_name)
 
+    return "sucessfully added new order in database"
+
+@app.route('/load_edited_profile_data', methods=['GET', 'POST'])
+def load_edited_profile_data():
+    edited_profile_data = request.args.get('key')
+    db_edited_profile_data = json.loads(edited_profile_data)
+
+    db = EmployInfo()
+    firstName = db_edited_profile_data['first-name']
+    lastName = db_edited_profile_data['last-name']
+    email = db_edited_profile_data['email-id']
+    userId = db_edited_profile_data['user-id']
+    password = db_edited_profile_data['password']
+    position = db_edited_profile_data['position']
+    dept = db_edited_profile_data['department']
+    company = global_company_name
+    order_authority = db_edited_profile_data['order-authority']
+
+    db.deleteUser(userId)
+    db.insertUser(firstName, lastName, email, userId, password,position,
+                          dept,company,order_authority)
+    
+    return "sucessfully added edited profile information in database"
 
 @app.route('/registerCompany', methods=['GET', 'POST'])
 def registerCompany():
@@ -111,10 +176,10 @@ def registerUser():
             password = request.form['password']
             position = request.form['position']
             dept = request.form['dept']
-            company = request.form['company']
-            orderHandler = int(request.form['orderHandler'])
+            company= global_company_name    
+            order_authority = request.form['employ-authority']
             db.insertUser(firstName, lastName, email, userId, password,position,
-                          dept,company,orderHandler)
+                          dept,company,order_authority)
             return redirect(url_for('login'))
         else:
             error = "User already exists"

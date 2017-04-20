@@ -1,6 +1,8 @@
 $(document).ready(function(){
 
 		document.getElementById("digital-order-form").style.display ="block";
+    UpdateProfileDataforform();
+    UpdateProfileData();
 
        $('li a').click(function() {
             $('li a').removeClass('active');
@@ -28,7 +30,6 @@ $(document).ready(function(){
               	document.getElementById("order-data").style.display ="none";
               	document.getElementById("profile").style.display ="block";
               	document.getElementById("user-logout").style.display ="none";
-                UpdateProfileData();
  
             } else if(v_href == "#!user-logout") {
 
@@ -38,6 +39,125 @@ $(document).ready(function(){
               	document.getElementById("user-logout").style.display ="block";
             }
        });
+
+
+
+
+        // Digital order form data
+
+        function UpdateProfileDataforform() {
+                // Update data about logged user data from database
+                $.ajax({
+											    type : "GET",
+											    url : "/load_profile_data_for_form",
+											    success: function(result) {
+                              var obj = JSON.parse(result)
+                              if ((obj.status) == 'OK'){
+                              		$("#order-first-name").val(obj.firstName) 
+                              		$("#order-last-name").val(obj.lastName) 
+                              		$("#order-email-id").val(obj.email) 
+                              		$("#order-user-id").val(obj.userId) 
+                              		$("#order-employ-position").val(obj.position) 
+                              		$("#order-department").val(obj.deptarment)
+                              } else {
+                                 console.log("Logged In user data is not found!")
+                              		$("#current-employ-first-name").val(" ") 
+                              		$("#current-employ-last-name").val(" ") 
+                              		$("#current-employ-email-id").val(" ") 
+                              		$("#current-employ-user-id").val(" ") 
+                              		$("#current-employ-password").val(" ") 
+                              		$("#current-employ-position").val(" ") 
+                              		$("#current-employ-department").val(" ")
+                              } 
+											    },
+                          error: function(error) {
+                              console.log(error);
+                          }
+								});
+        }
+
+        document.getElementById("submit-new-order-bt").onclick = function() {Addneworder()};
+           function Addneworder() {
+                    
+                    if ((($("#order-item-name").val()).trim() == "") ||
+                        (($("#order-item-quentities").val()).trim() == "") ||
+                        (($("#order-from-where").val()).trim() == "") ||
+                        (($("#order-time-period").val()).trim() == "") ||
+                        (($("#order-use-reason").val()).trim() == "")){
+                           $d("#NewOrderItemErrorDialog").dialog("open");
+                    } else {
+                        var obj_data = {
+                                      "order-first-name" : $("#order-first-name").val(),
+                                      "order-last-name" : $("#order-last-name").val(),
+                                      "order-email-id" : $("#order-email-id").val(),
+                                      "order-employ-position" : $("#order-employ-position").val(),
+                                      "order-department" : $("#order-department").val(),
+                                      "order-item-name" : $("#order-item-name").val(),
+                                      "order-item-detail" : $("#order-item-detail").val(),
+                                      "order-item-quentities" : $("#order-item-quentities").val(),
+                                      "order-from-where" : $("#order-from-where").val(),
+                                      "order-time-period" : $("#order-time-period").val(),
+                                      "order-use-reason" : $("#order-use-reason").val()
+                                   }
+                        var new_order_data = JSON.stringify(obj_data);
+                        $.ajax({
+                            type : "GET",
+                            url : "load_new_order_data",
+                            data : { key : new_order_data}, 
+                            dataType : 'json',
+                            contentType : 'application/json; charset=utf-8',
+                            success : function(data) {
+                               console.log(data);
+                            }
+                        });
+                        
+                       // clear form
+                          $("#order-item-name").val() = "";
+                          $("#order-item-detail").val() = "";
+                          $("#order-item-quentities").val() = "";
+                          $("#order-from-where").val() = "";
+                          $("#order-time-period").val() = "";
+                          $("#order-use-reason").val() = "";
+  
+                    }
+                    
+
+           }
+
+           // use $d instead of $ because to avoid conflict of jquery js libraries of different version.
+           $d("#NewOrderItemErrorDialog").dialog({
+               modal : true,
+               closeOnEscape : true,
+               maxHeight: 200,
+               width : 300,
+               maxWidth: 300,
+               position: { my: "center", at: "center", of: window },
+               buttons : {
+                  'OK': function() {
+                      $d(this).dialog('close');
+                 }
+               },
+               autoOpen : false
+           });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
        var placed_order_table =
@@ -186,6 +306,11 @@ $(document).ready(function(){
 
 
            
+
+
+
+
+
        // profile data
 
            function UpdateProfileData() {
@@ -194,8 +319,6 @@ $(document).ready(function(){
 											    type : "GET",
 											    url : "/load_profile_data",
 											    success: function(result) {
-											        console.log("vibhuti");
-											        console.log(result);
                               var obj = JSON.parse(result)
                               if ((obj.status) == 'OK'){
                               		$("#current-employ-first-name").val(obj.firstName) 
@@ -205,6 +328,16 @@ $(document).ready(function(){
                               		$("#current-employ-password").val(obj.password) 
                               		$("#current-employ-position").val(obj.position) 
                               		$("#current-employ-department").val(obj.deptarment)
+
+                                  var order_authority_data = obj.order_authority;
+                                  if (order_authority_data == "order-handler"){
+                                      document.getElementById("current-employ-order-handler").checked = true;
+                                  } else if (order_authority_data == "manager"){
+                                      document.getElementById("current-employ-manager").checked = true;
+                                  } else {
+                                      document.getElementById("current-employ-worker").checked = true;
+                                  }
+
                               } else {
                                  console.log("Logged In user data is not found!")
                               		$("#current-employ-first-name").val(" ") 
@@ -214,6 +347,7 @@ $(document).ready(function(){
                               		$("#current-employ-password").val(" ") 
                               		$("#current-employ-position").val(" ") 
                               		$("#current-employ-department").val(" ")
+                                  document.getElementById("current-employ-worker").checked = true;
                               } 
 											    },
                           error: function(error) {
@@ -227,52 +361,103 @@ $(document).ready(function(){
            function AllowProfileEditing() {
                var profile_data_inputs = document.getElementById('profile').getElementsByTagName('input');
  	              for (i = 0; i < profile_data_inputs.length; i++) {
+                  // USR COULD NOT EDIT USER_ID
+                  if (i != 3){
                     profile_data_inputs[i].removeAttribute("readonly");
+                  }
 							  }
-                document.getElementById("current-employ-order-handler").disabled = false;
-                document.getElementById("current-employ-manager").disabled = false;
-                document.getElementById("current-employ-worker").disabled = false;
                 document.getElementById("submit-current-employ-account-btn").disabled = false;
+                document.getElementById("cancel-current-employ-account-btn").disabled = false;
 
            }
 
 
+        document.getElementById("cancel-current-employ-account-btn").onclick = function() {
+                UpdateProfileData();
+                var profile_data_inputs = document.getElementById('profile').getElementsByTagName('input');
+                for (i = 0; i < profile_data_inputs.length; i++) {
+                  if (i != 3){
+                    profile_data_inputs[i].setAttribute("readonly","");
+                  }
+                }
+                document.getElementById("submit-current-employ-account-btn").disabled = true;
+                document.getElementById("cancel-current-employ-account-btn").disabled = true;
+            
+        };
+
         document.getElementById("submit-current-employ-account-btn").onclick = function() {UpdateProfileEditing()};
            function UpdateProfileEditing() {
 
-								console.log("vibhuti submit bt");
-                /* 
-                $.ajax({
-											    type : "POST",
-											    url : "/update_profile_data",
-											    success: function(result) {
-											        console.log("vibhuti");
-											        console.log(result);
-                              var obj = JSON.parse(result)
-											        console.log(obj.status);
-                              if ((obj.status) == 'OK'){
-                              		$("#current-employ-first-name").val(obj.firstName) 
-                              		$("#current-employ-last-name").val(obj.lastName) 
-                              		$("#current-employ-email-id").val(obj.email) 
-                              		$("#current-employ-user-id").val(obj.userId) 
-                              		$("#current-employ-password").val(obj.password) 
-                              		$("#current-employ-position").val(obj.position) 
-                              		$("#current-employ-department").val(obj.deptarment)
-                              } else {
-                                 console.log("Logged In user data is not found!")
-                                 
-                              } 
-											    },
-                          error: function(error) {
-                              console.log(error);
+                    if ((($("#current-employ-first-name").val()).trim() == "") ||
+                        (($("#current-employ-last-name").val()).trim() == "") ||
+                        (($("#current-employ-email-id").val()).trim() == "") ||
+                        (($("#current-employ-user-id").val()).trim() == "") ||
+                        (($("#current-employ-password").val()).trim() == "") ||
+                        (($("#current-employ-position").val()).trim() == "") ||
+                        (($("#current-employ-department").val()).trim() == "")){
+                           $d("#EditedProfileErrorDialog").dialog("open");
+                           UpdateProfileData();
+                    } else {
+                          var order_authority_data = "employ";
+                          if (document.getElementById("current-employ-order-handler").checked){
+                              order_authority_data = $("#current-employ-order-handler").val();
+                          } else if (document.getElementById("current-employ-manager").checked){
+                              order_authority_data = $("#current-employ-manager").val();
+                          } else {
+                              order_authority_data = $("#current-employ-worker").val();
                           }
-								});
-                */
 
+                          var obj_data = {
+                                      "first-name" : $("#current-employ-first-name").val(),
+                                      "last-name" : $("#current-employ-last-name").val(),
+                                      "email-id" : $("#current-employ-email-id").val(),
+                                      "user-id" : $("#current-employ-user-id").val(),
+                                      "password" : $("#current-employ-password").val(),
+                                      "position" : $("#current-employ-position").val(),
+                                      "department" : $("#current-employ-department").val(),
+                                      "order-authority" : order_authority_data
+                                   }
+                        var edited_profile_data = JSON.stringify(obj_data);
+                        $.ajax({
+                            type : "GET",
+                            url : "load_edited_profile_data",
+                            data : { key : edited_profile_data}, 
+                            dataType : 'json',
+                            contentType : 'application/json; charset=utf-8',
+                            success : function(data) {
+                               console.log(data);
+                            }
+                        });
 
+ 
+                    }
 
+               var profile_data_inputs = document.getElementById('profile').getElementsByTagName('input');
+ 	              for (i = 0; i < profile_data_inputs.length; i++) {
+                  if (i != 3){
+                    profile_data_inputs[i].setAttribute("readonly","");
+                  }
+							  }
+                document.getElementById("submit-current-employ-account-btn").disabled = true;
+                document.getElementById("cancel-current-employ-account-btn").disabled = true;
 
         }
+
+        // use $d instead of $ because to avoid conflict of jquery js libraries of different version.
+           $d("#EditedProfileErrorDialog").dialog({
+               modal : true,
+               closeOnEscape : true,
+               maxHeight: 200,
+               width : 300,
+               maxWidth: 300,
+               position: { my: "center", at: "center", of: window },
+               buttons : {
+                  'OK': function() {
+                      $d(this).dialog('close');
+                 }
+               },
+               autoOpen : false
+           });
 
 });
 

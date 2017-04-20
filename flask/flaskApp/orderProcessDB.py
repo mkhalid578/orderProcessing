@@ -57,20 +57,23 @@ class EmployInfo(object):
         row = self.cur.fetchone()
         return row[0]
     
-    def getOrderHandler(self, userId):
-        self.cur.execute("SELECT `order-handler` FROM employinfo where `user-id`='%s'" % (userId))
+    def getorderAuthority(self, userId):
+        self.cur.execute("SELECT `order-authority` FROM employinfo where `user-id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
 
     def insertUser(self, firstName, lastName, email, userId, password,
-                       position, department, companyName, orderHandler):
+                       position, department, companyName, order_authority):
         self.cur.execute("""INSERT INTO employinfo (`first-name`,`last-name`, `email-id`, `user-id`, `password`,
-                            `position`, `department`, `company-name`, `order-handler`)
-                            VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%d');"""
+                            `position`, `department`, `company-name`, `order-authority`)
+                            VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s');"""
                          % (firstName, lastName, email, userId, password, position, department,
-                            companyName, orderHandler))
+                            companyName, order_authority))
         self.sqlConnection.commit()
 
+    def deleteUser(self, userId):
+        self.cur.execute("DELETE FROM employinfo where `user-id`='%s'" % (userId))
+        self.sqlConnection.commit()
     
     def __repr__(self):
         return '[%s, %s]' % (self.host, self.db)
@@ -224,6 +227,20 @@ class ItemOrder(object):
         row = self.cur.fetchone()
         return row[0]
 
+    def insert_new_order(self,firstName, lastName, emailId, position, dept, itemName, itemDetail, itemQuantity,
+               fromWhere, timePeriod, useReason, company_name):
+
+        sql = """INSERT INTO `item-order` (`first-name`, `last-name`,
+                `email-id`, `position`, `department`, `item-name`, `item-detail`,
+                `item-quentities`, `from-where`, `time-period`, `use-reason`, `company-name`)
+                 VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
+                            '%s', '%s', '%s');""" \
+              % (firstName, lastName, emailId, position, dept, itemName, itemDetail, itemQuantity,
+                 fromWhere, timePeriod, useReason, company_name)
+
+        self.cur.execute(sql)
+        self.sqlConnection.commit()
+
     def insert(self,itemId, firstName, lastName, emailId, position, dept, itemName, itemDetail, itemQuantity,
                fromWhere, timePeriod, useReason, placeOrderDate, orderStatus, shipCompany, trackNumber,
                trackingWebsite, expectedArrival, actualArrival, comment):
@@ -233,7 +250,7 @@ class ItemOrder(object):
                 `item-quentities`, `from-where`, `time-period`, `use-reason`,
                 `place-order-date`, `order-status`, `shipment-company`,
                 `tracking-number`, `tracking-webside`, `expected-arriving-date`, `arrived-date`, `comment`)
-                 VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s',
+                 VALUES ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
                             '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');""" \
               % (itemId, firstName, lastName, emailId, position, dept, itemName, itemDetail, itemQuantity,
                  fromWhere, timePeriod, useReason, placeOrderDate, orderStatus, shipCompany, trackNumber,

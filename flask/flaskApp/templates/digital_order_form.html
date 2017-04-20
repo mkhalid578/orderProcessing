@@ -30,7 +30,7 @@
               </textarea>
           <br><br>
           Item-Quentities:<br>
-              <input class="input-box" id="order-item-quentities" type="number" name="OrderItemQuentities" value=" ">
+              <input class="input-box" id="order-item-quentities" min="1" type="number" name="OrderItemQuentities" value=" ">
           <br><br>
           From-Where:<br>
               <input class="input-box" id="order-from-where" type="text" name="OrderFromWhere" value=" " style="width: 350px;" >
@@ -43,8 +43,21 @@
               </textarea>
           <br><br>
 
-          <input id="submit-new-employ-account" type="submit" value="Submit">
+          <input id="submit-new-order-bt" type="button" value="Submit">
   	</fieldset>
 	</form>
 </div>
+
+<div id="NewOrderItemErrorDialog" class="flora" title="Order Item Error"  hidden="hidden">
+      <label id="order-person-detail-error-dialogtext"
+             style="text-align: center; color: brown; font-size: larger;">
+						Please, enter all the information regrading to the new order.
+			</label><br>
+
+</div>
+
+
+
+
+
 

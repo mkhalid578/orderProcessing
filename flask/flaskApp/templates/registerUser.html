@@ -68,18 +68,13 @@
 	  
 	  <div class="row">
        	    <div class="input-field col s4">
-	      <input disabled id="disabled" type="text" class="validate">
-              <label for="disabled">Order Handler</label>
+	      <input id="reg-order-handler" type="radio" name="employ-authority" class="validate" value="order-handler">
+              <label for="reg-order-handler">Order Handler</label>
+	      <input id="reg-manager" type="radio" name="employ-authority" class="validate"  value="manager">
+              <label for="reg-manager">Manager</label>
+	      <input id="reg-employ-worker" type="radio" name="employ-authority" class="validate"  value="employ">
+              <label for="reg-employ-worker">Employ</label>
             </div>
-	  </div>
-	  <div class="row">
-	    <input type="checkbox" id="yes" />
-      	    <label for="yes">Yes</label>
-	    
-	  </div>
-	  <div class="row">
-	    <input type="checkbox" id="no" />
-      				<label for="no">No</label>
 	  </div>
 	  <button class="btn waves-effect waves-light" type="submit" name="action"> Register Account </button>
 	  
