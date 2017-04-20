@@ -3,7 +3,7 @@
 import pymysql as sql
 
 class EmployInfo(object):
-    
+
     def __init__(self):
         self.user = 'root'
         self.password = 'bane786'
@@ -13,47 +13,47 @@ class EmployInfo(object):
                                          self.user,
                                          self.password,
                                          self.db)
-        
+
         self.cur = self.sqlConnection.cursor()
 
     def getUserId(self, userId):
-        self.cur.execute("SELECT `user-id` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `user_id` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
 
     def getPosition(self, userId):
-        self.cur.execute("SELECT position FROM employinfo where `user-id` = '%s'" % (userId))
+        self.cur.execute("SELECT position FROM employinfo where `user_id` = '%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
 
     def getFirstName(self, userId):
-        self.cur.execute("SELECT `first-name` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `first_name` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
 
     def getLastName(self, userId):
-        self.cur.execute("SELECT `last-name` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `last_name` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
 
 
     def getEmailId(self, userId):
-        self.cur.execute("SELECT `email-id` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `email_id` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
-    
+
     def getPassword(self, userId):
-        self.cur.execute("SELECT `password` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `password` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
-    
+
     def getDept(self, userId):
-        self.cur.execute("SELECT `department` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `department` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
-    
+
     def getCompanyName(self, userId):
-        self.cur.execute("SELECT `company-name` FROM employinfo where `user-id`='%s'" % (userId))
+        self.cur.execute("SELECT `company_name` FROM employinfo where `user_id`='%s'" % (userId))
         row = self.cur.fetchone()
         return row[0]
     
@@ -80,7 +80,7 @@ class EmployInfo(object):
 
 
 class Company(object):
-    
+
     def __init__(self):
         self.user = 'root'
         self.password = 'bane786'
@@ -90,7 +90,7 @@ class Company(object):
                                          self.user,
                                          self.password,
                                          self.db)
-        
+
         self.cur = self.sqlConnection.cursor()
 
     def getName(self, name):
@@ -258,4 +258,3 @@ class ItemOrder(object):
 
         self.cur.execute(sql)
         self.sqlConnection.commit()
-
