@@ -141,3 +141,36 @@
 | Modify Login UI                                             | Muhammed Khalid  | 4                | Open |
 | Create User Login Sessions                                  | Muhammed Khalid  | 5                | Open |
 
+## Meeting 2 | Sprint Planning 
+#### Location: Online 03/31
+* Still working on the same artifacts
+* The Login UI was modified with CSS
+* Learning about SQL ORM (SQLAlchemy
+* Working on User Login Sessions
+
+| Stories                                                     | Assignee         | Estimate (Hours) | Status |
+|-------------------------------------------------------------|------------------|------------------|--------|
+| Create UI allowing user to modify profile information       | Vibhuti Patel    | 2                | Open |
+| Give Edit Permissions for Orders depending on User Type     | Vibhuti Patel    | 1                | Open |
+| Add backend to User Submission UI                           | Muhammed Khalid  | 5                | Open |
+| Create UI showing list of orders                            | Vibhuti Patel    | 5                | Open |
+| Modify Login UI                                             | Muhammed Khalid  | 4                | Open |
+| Create User Login Sessions                                  | Muhammed Khalid  | 5                | Open |
+
+
+## Meeting 2 | Sprint Planning 
+#### Location: Online 04/04
+* Still working on the same artifacts
+* Everyone is making good progress on their stories
+* Still working on the same stories from previous sprint meeting
+* No new progress and no closed stories
+
+| Stories                                                     | Assignee         | Estimate (Hours) | Status |
+|-------------------------------------------------------------|------------------|------------------|--------|
+| Create UI allowing user to modify profile information       | Vibhuti Patel    | 2                | Open |
+| Give Edit Permissions for Orders depending on User Type     | Vibhuti Patel    | 1                | Open |
+| Add backend to User Submission UI                           | Muhammed Khalid  | 5                | Open |
+| Create UI showing list of orders                            | Vibhuti Patel    | 5                | Open |
+| Modify Login UI                                             | Muhammed Khalid  | 4                | Open |
+| Create User Login Sessions                                  | Muhammed Khalid  | 5                | Open |
+
