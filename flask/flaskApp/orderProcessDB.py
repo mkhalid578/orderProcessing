@@ -233,6 +233,10 @@ class ItemOrder(object):
         self.sqlConnection.commit()
         return "True"
 
+    def deleteOrder(self, itemID):
+        self.cur.execute("DELETE FROM `item-order` where `item_id`='%d'" % (itemID))
+        self.sqlConnection.commit()
+
     def editOrder(self, itemID, orderStatus, orderPlacedDate, shipmentCompany, trackingNumber,
               trackingWebsite, expectedArrivingDate, arrivedDate):
 

@@ -188,6 +188,16 @@ def load_order_data_for_list():
         order_data = db.getOrderList(global_company_name)
     return json.dumps({'status_data': order_data}); 
 
+@app.route('/load_deleted_order_data', methods=['GET', 'POST'])
+def load_deleted_order_data():
+    deleted_order_data = request.args.get('key')
+    db_deleted_order_data = json.loads(deleted_order_data)
+
+    db = ItemOrder()
+    itemID = db_deleted_order_data['order-item-id']
+    db.deleteOrder(itemID)
+    return redirect(url_for('load_order_data_for_list'))
+
 @app.route('/load_edited_order_status_data', methods=['GET', 'POST'])
 def load_edited_order_status_data():
     edited_order_status_data = request.args.get('key')

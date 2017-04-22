@@ -238,9 +238,10 @@ $(document).ready(function(){
 
                   $d("#OrderItemDialog").dialog('open').scrollTop(0);
                   if (document.getElementById("current-employ-worker").checked){
-                        // first is "edit" button and second is "save" button
+                        // first is "edit" button and second is "save" button and third is delete
                         document.getElementsByClassName("ui-button-text-only")[1].setAttribute("style","visibility : hidden;");
                         document.getElementsByClassName("ui-button-text-only")[2].setAttribute("style","visibility : hidden;");
+                        document.getElementsByClassName("ui-button-text-only")[3].setAttribute("style","visibility : hidden;");
                   } else {
                          //editing authority for order handler/manager
                   }
@@ -301,6 +302,7 @@ $(document).ready(function(){
                            document.getElementById("order-status-detail").disabled = false;
                       } else if (document.getElementById("current-employ-manager").checked){
                            document.getElementById("order-status-detail").disabled = false;
+                           document.getElementById("item-delete-donot-approved").disabled = false;
                       } else {
                          //not editing authority for employ
                       }
@@ -360,7 +362,7 @@ $(document).ready(function(){
                          //not editing authority for employ
                       }
 
-                      // update database
+                      // updated database
                       document.getElementById("order-status-detail").disabled = true;
                       $d(this).dialog('close');
                       var order_tracking_data_inputs = document.getElementById('placed-order-item-detail-dialogtext')
@@ -368,7 +370,45 @@ $(document).ready(function(){
                                for (i = 0; i < order_tracking_data_inputs.length; i++) {
                                      order_tracking_data_inputs[i].setAttribute("readonly","");
                                }
-                 }
+                      document.getElementById("item-delete-donot-approved").setAttribute("readonly","");
+                      document.getElementById("item-delete-donot-approved").checked = false;
+                 },
+                 'Delete': function() {
+                      //do something
+                      if (document.getElementById("current-employ-manager").checked &&
+                          document.getElementById("item-delete-donot-approved").checked){
+                           var obj_data = {
+                                      "order-item-id" : selected_item_id_number}
+                           var deleted_order_data = JSON.stringify(obj_data);
+                           $.ajax({
+                               type : "GET",
+                               url : "load_deleted_order_data",
+                               data : { key : deleted_order_data}, 
+                               dataType : 'json',
+                               contentType : 'application/json; charset=utf-8',
+                               success : function(result) {
+                                   var obj = [];
+                                      for ( var i=0; i < (result.status_data).length ; i++ ) {
+                                              obj.push(JSON.parse((result.status_data)[i]));
+                                      }
+                                    
+                                   placed_order_table.rows().remove();
+                                   upload_order_data_table(obj);
+                               }
+                           });
+                      } else {
+                         //not deleting authority for employ and order handler
+                      }
+                      document.getElementById("order-status-detail").disabled = true;
+                      $d(this).dialog('close');
+                      var order_tracking_data_inputs = document.getElementById('placed-order-item-detail-dialogtext')
+                                                                   .getElementsByTagName('input');
+                               for (i = 0; i < order_tracking_data_inputs.length; i++) {
+                                     order_tracking_data_inputs[i].setAttribute("readonly","");
+                               }
+                      document.getElementById("item-delete-donot-approved").disabled = true;
+                      document.getElementById("item-delete-donot-approved").checked = false;
+                  },
                },
                autoOpen : false
            });
