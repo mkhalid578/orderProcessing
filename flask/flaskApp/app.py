@@ -77,8 +77,8 @@ def companyLogin():
             return redirect(url_for('login'))
     return render_template('company-login.html', error=error)
 
+#@login_required
 @app.route('/processOrder')
-@login_required
 def placeOrder():
     return render_template('processing-window.html')
 
@@ -128,10 +128,6 @@ def load_profile_data_for_form():
     else:
     		return json.dumps({'status':'NOT-OK'});
 
-@app.route('/update_profile_data', methods=['GET', 'POST'])
-def update_profile_data():
-    return "hi"
-
 @app.route('/load_new_order_data', methods=['GET', 'POST'])
 def load_new_order_data():
     new_order_data = request.args.get('key')
@@ -149,9 +145,11 @@ def load_new_order_data():
     from_where = db_new_order_data['order-from-where']
     time_period = db_new_order_data['order-time-period']
     use_reason = db_new_order_data['order-use-reason']
+    order_status = db_new_order_data['order-status']
+
     company_name = global_company_name    
     db.insert_new_order(first_name,last_name,email_id,employ,department,item_name,item_detail,
-                        item_quentities,from_where,time_period,use_reason,company_name)
+                        item_quentities,from_where,time_period,use_reason,order_status,company_name)
 
     return "sucessfully added new order in database"
 
@@ -176,6 +174,50 @@ def load_edited_profile_data():
                           dept,company,order_authority)
     
     return "sucessfully added edited profile information in database"
+
+
+@app.route('/data/order-process/orderlist', methods=['GET', 'POST'])
+def load_order_data_for_list():
+    db = ItemOrder()
+    edb = EmployInfo()
+    order_authority = edb.getorderAuthority(global_login_user_id)
+    dept = edb.getDept(global_login_user_id)
+    if order_authority == "employ":
+        order_data = db.getOrderListEmp(global_company_name, dept)
+    else:
+        order_data = db.getOrderList(global_company_name)
+    return json.dumps({'status_data': order_data}); 
+
+@app.route('/load_edited_order_status_data', methods=['GET', 'POST'])
+def load_edited_order_status_data():
+    edited_order_status_data = request.args.get('key')
+    db_edited_order_status_data = json.loads(edited_order_status_data)
+
+    db = ItemOrder()
+    itemID = db_edited_order_status_data['order-item-id']
+    orderStatus = db_edited_order_status_data['order-status']
+    updating_part = db.editOrderStatus(itemID, orderStatus)
+    return redirect(url_for('load_order_data_for_list'))
+
+@app.route('/load_edited_order_data', methods=['GET', 'POST'])
+def load_edited_order_data():
+    edited_order_data = request.args.get('key')
+    db_edited_order_data = json.loads(edited_order_data)
+
+    db = ItemOrder()
+    itemID = db_edited_order_data['order-item-id']
+    orderStatus = db_edited_order_data['order-status']
+    orderPlacedDate = db_edited_order_data['placed-order-date']
+    shipmentCompany = db_edited_order_data['shipment-company']
+    trackingNumber = db_edited_order_data['tracking-number']
+    trackingWebsite = db_edited_order_data['tracking-website']
+    expectedArrivingDate = db_edited_order_data['expected-arriving-date']
+    arrivedDate = db_edited_order_data['arrived-date']
+    db.editOrder(itemID, orderStatus, orderPlacedDate, shipmentCompany,
+                 trackingNumber, trackingWebsite, expectedArrivingDate, arrivedDate)
+
+    return redirect(url_for('load_order_data_for_list'))
+
 
 @app.route('/registerCompany', methods=['GET', 'POST'])
 def registerCompany():

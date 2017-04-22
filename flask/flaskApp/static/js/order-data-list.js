@@ -42,7 +42,7 @@ $(document).ready(function(){
 
 
 
-
+// **********************************************************************************************************************
         // Digital order form data
 
         function UpdateProfileDataforform() {
@@ -97,7 +97,8 @@ $(document).ready(function(){
                                       "order-item-quentities" : $("#order-item-quentities").val(),
                                       "order-from-where" : $("#order-from-where").val(),
                                       "order-time-period" : $("#order-time-period").val(),
-                                      "order-use-reason" : $("#order-use-reason").val()
+                                      "order-use-reason" : $("#order-use-reason").val(),
+                                      "order-status" : "approval-pending"
                                    }
                         var new_order_data = JSON.stringify(obj_data);
                         $.ajax({
@@ -112,12 +113,12 @@ $(document).ready(function(){
                         });
                         
                        // clear form
-                          $("#order-item-name").val() = "";
-                          $("#order-item-detail").val() = "";
-                          $("#order-item-quentities").val() = "";
-                          $("#order-from-where").val() = "";
-                          $("#order-time-period").val() = "";
-                          $("#order-use-reason").val() = "";
+                          $("#order-item-name").val("");
+                          $("#order-item-detail").val("");
+                          $("#order-item-quentities").val("");
+                          $("#order-from-where").val("");
+                          $("#order-time-period").val("");
+                          $("#order-use-reason").val("");
   
                     }
                     
@@ -142,33 +143,19 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// **********************************************************************************************************************
 
 
        var placed_order_table =
             $("#placed-order-table").DataTable(
                   { "ajax": {
-   														 "url": "data/order-process/orderlist/",
-    													 "dataSrc": function ( json ) {
-    																				  for ( var i=0, ien=json.data.length ; i<ien ; i++ ) {
-        																							json.data[i][0] = '<a href="/message/'+json.data[i][0]+'>View message</a>';
+   														 "url": "/data/order-process/orderlist",
+    													 "dataSrc": function (result) {
+                                              var obj = [];
+    																				  for ( var i=0; i < (result.status_data).length ; i++ ) {
+                                                    obj.push(JSON.parse((result.status_data)[i]));
       																				}
-      																				return json.data;
+      																			  upload_order_data_table(obj);
     																			}
   													},
                     "columns" : [ {"title" : "ItemNumber"},
@@ -183,7 +170,7 @@ $(document).ready(function(){
                          {"title" : "From-Where"},
                          {"title" : "Time-Period"},
                          {"title" : "Use/Reason"},
-                         {"title" : "PlaceOrderData"},
+                         {"title" : "Placed-Order-Date"},
                          {"title" : "Order-Status"},
                          {"title" : "Shipment-Company"},
                          {"title" : "Tracking-Number"},
@@ -197,7 +184,7 @@ $(document).ready(function(){
                   	"scrollCollapse" : false,
                   	"searching" : false});
 
-            placed_order_table.columns( [ 0, 3, 4, 7, 9, 10, 12, 14, 15, 16, 17, 18] )
+            placed_order_table.columns( [ 0, 3, 4, 7, 9, 10, 12, 13, 14, 15, 16, 17, 18] )
                              .visible( false, true );
 
             // adjust column sizing and redraw
@@ -209,32 +196,35 @@ $(document).ready(function(){
             document.getElementsByClassName("dataTables_scrollBody")[0].style.overflow = "";
 
 
-           placed_order_table.row.add([
-                  "11",
-                  "vibhuti",
-                  "patel",
-                  "vibhuti_patel1@student.uml.edu",
-                  "student",
-                  "Electrical engineering",
-                  "grounding-cabel",
-                  "xyz detail",
-                  "2counts",
-                  "amazon.com",
-                  "2-3days",
-                  "EE capsote project",
-                  "Please, order ASAP",
-                  "order-placed",
-                  "USPS",
-                  "abcd99999999",
-                  "www.usps.com",
-                  "3-23-2017",
-                  "3-23-2017"
-                        ]).draw();
+      		 function upload_order_data_table(obj){
+                 for(var i = 0; i < obj.length; i++){  
+                    placed_order_table.row.add([
+                                  obj[i]["ItemNumber"],
+                                  obj[i]["First-Name"],
+                                  obj[i]["Last-Name"],
+                     	      	    obj[i]["Email-Id"],
+        	                        obj[i]["Position"],
+                        	        obj[i]["Department"],
+            	                    obj[i]["Item-Name"],
+                                  obj[i]["Item-Detail"],
+                                  obj[i]["Item-Quentities"],
+                                  obj[i]["From-Where"],
+                                  obj[i]["Time-Period"],
+                                  obj[i]["Use/Reason"],
+                                  obj[i]["Placed-Order-Date"],
+                                  obj[i]["Order-Status"],
+                                  obj[i]["Shipment-Company"],
+                                  obj[i]["Tracking-Number"],
+                                  obj[i]["Tracking-Webside"],
+                                  obj[i]["Expected-Arriving-Date"],
+                                  obj[i]["Arrived-Date"]
+                             ])
+                 }
+                 placed_order_table.draw(false); // redraw
+           }
 
-
-
-
-
+           // this var is used for updating data in database for item order
+           var selected_item_id_number;
            $('#placed-order-table tbody').on( 'click', 'tr', function () {
               if ( $(this).hasClass('selected') ) {
                   $(this).removeClass('selected');
@@ -242,11 +232,18 @@ $(document).ready(function(){
               else {
                   placed_order_table.$('tr.selected').removeClass('selected');
                   $(this).addClass('selected');
-                  console.log(placed_order_table.row('.selected').data());
                   var selected_order_detail = placed_order_table.row('.selected').data();
                   displayorderdata(selected_order_detail);
+                  selected_item_id_number = selected_order_detail[0];
 
                   $d("#OrderItemDialog").dialog('open').scrollTop(0);
+                  if (document.getElementById("current-employ-worker").checked){
+                        // first is "edit" button and second is "save" button
+                        document.getElementsByClassName("ui-button-text-only")[1].setAttribute("style","visibility : hidden;");
+                        document.getElementsByClassName("ui-button-text-only")[2].setAttribute("style","visibility : hidden;");
+                  } else {
+                         //editing authority for order handler/manager
+                  }
               }
            } );
 
@@ -266,11 +263,11 @@ $(document).ready(function(){
                        "Item-Quentities :          " + selected_order_detail[8] + "\n \n" +
                        "From-Where :               " + selected_order_detail[9] + "\n \n" +
                        "Time-Period :              " + selected_order_detail[10] + "\n \n" +
-                       "Use/Reason :               " + selected_order_detail[11] + "\n \n" +
-                       "PlaceOrderData :           " + selected_order_detail[12] + "\n \n" ;
+                       "Use/Reason :               " + selected_order_detail[11] + "\n \n";
 
               $("#order-status-detail").val(selected_order_detail[13]);
 
+              $("#item-detail-placed-order-date").val(selected_order_detail[12]);
               $("#item-detail-shipment-company").val(selected_order_detail[14]);
               $("#item-detail-tracking-number").val(selected_order_detail[15]);
               $("#item-detail-tracking-website").val(selected_order_detail[16]);
@@ -295,10 +292,82 @@ $(document).ready(function(){
                buttons : {
                   'Edit': function() {
                       //do something
-                      document.getElementById("order-status-detail").disabled = false;
+                      if (document.getElementById("current-employ-order-handler").checked){
+                           var order_tracking_data_inputs = document.getElementById('placed-order-item-detail-dialogtext')
+                                                                   .getElementsByTagName('input');
+                           for (i = 0; i < order_tracking_data_inputs.length; i++) {
+                                     order_tracking_data_inputs[i].removeAttribute("readonly");
+                           }
+                           document.getElementById("order-status-detail").disabled = false;
+                      } else if (document.getElementById("current-employ-manager").checked){
+                           document.getElementById("order-status-detail").disabled = false;
+                      } else {
+                         //not editing authority for employ
+                      }
                   },
                   'Save': function() {
+
+                      if (document.getElementById("current-employ-order-handler").checked){
+                           var obj_data = {
+                                      "order-item-id" : selected_item_id_number,
+                                      "order-status" : $("#order-status-detail").val(),
+                                      "placed-order-date" : $("#item-detail-placed-order-date").val(),
+                                      "shipment-company" : $("#item-detail-shipment-company").val(),
+                                      "tracking-number" : $("#item-detail-tracking-number").val(),
+                                      "tracking-website" : $("#item-detail-tracking-website").val(),
+                                      "expected-arriving-date" : $("#item-detail-expected-arriving-date").val(),
+                                      "arrived-date" : $("#item-detail-arrived-date").val()
+                                      }
+                           var edited_order_data = JSON.stringify(obj_data);
+                           $.ajax({
+                               type : "GET",
+                               url : "load_edited_order_data",
+                               data : { key : edited_order_data}, 
+                               dataType : 'json',
+                               contentType : 'application/json; charset=utf-8',
+                               success : function(result) {
+                                   var obj = [];
+                                      for ( var i=0; i < (result.status_data).length ; i++ ) {
+                                              obj.push(JSON.parse((result.status_data)[i]));
+                                      }
+                                    
+                                   placed_order_table.rows().remove();
+                                   upload_order_data_table(obj);
+                               }
+                           });
+                      } else if (document.getElementById("current-employ-manager").checked){
+                           var obj_data = {
+                                      "order-item-id" : selected_item_id_number,
+                                      "order-status" : $("#order-status-detail").val()}
+                           var edited_order_status_data = JSON.stringify(obj_data);
+                           $.ajax({
+                               type : "GET",
+                               url : "load_edited_order_status_data",
+                               data : { key : edited_order_status_data}, 
+                               dataType : 'json',
+                               contentType : 'application/json; charset=utf-8',
+                               success : function(result) {
+                                   var obj = [];
+                                      for ( var i=0; i < (result.status_data).length ; i++ ) {
+                                              obj.push(JSON.parse((result.status_data)[i]));
+                                      }
+                                    
+                                   placed_order_table.rows().remove();
+                                   upload_order_data_table(obj);
+                               }
+                           });
+                      } else {
+                         //not editing authority for employ
+                      }
+
+                      // update database
+                      document.getElementById("order-status-detail").disabled = true;
                       $d(this).dialog('close');
+                      var order_tracking_data_inputs = document.getElementById('placed-order-item-detail-dialogtext')
+                                                                   .getElementsByTagName('input');
+                               for (i = 0; i < order_tracking_data_inputs.length; i++) {
+                                     order_tracking_data_inputs[i].setAttribute("readonly","");
+                               }
                  }
                },
                autoOpen : false
@@ -309,8 +378,7 @@ $(document).ready(function(){
 
 
 
-
-
+// **********************************************************************************************************************
        // profile data
 
            function UpdateProfileData() {
@@ -459,5 +527,5 @@ $(document).ready(function(){
                autoOpen : false
            });
 
-});
+});  // END of File
 
