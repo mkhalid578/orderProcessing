@@ -1,8 +1,13 @@
 $(document).ready(function(){
 
 		document.getElementById("digital-order-form").style.display ="block";
+ 
+    // this use for updating data in form after user edit data in profile tab
+    var ProfileDataEdited = false;
     UpdateProfileDataforform();
     UpdateProfileData();
+    var orderupdateVar;  // updating order table using interval
+
 
        $('li a').click(function() {
             $('li a').removeClass('active');
@@ -15,14 +20,19 @@ $(document).ready(function(){
               	document.getElementById("order-data").style.display ="none";
               	document.getElementById("profile").style.display ="none";
               	document.getElementById("user-logout").style.display ="none";
-
+                if (ProfileDataEdited == true){
+                    UpdateProfileDataforform();
+                    ProfileDataEdited = false;
+                }
+                clearTimeout(orderupdateVar);
             } else if(v_href == "#!order-data") {
 
               	document.getElementById("digital-order-form").style.display ="none";
               	document.getElementById("order-data").style.display ="block";
               	document.getElementById("profile").style.display ="none";
               	document.getElementById("user-logout").style.display ="none";
-                   $("#placed-order-table").DataTable().draw();
+                $("#placed-order-table").DataTable().draw();
+                orderupdateVar = setInterval( UpdateOrderDataPriodically, 30000 );
 
             } else if(v_href == "#!profile") {
 
@@ -30,6 +40,7 @@ $(document).ready(function(){
               	document.getElementById("order-data").style.display ="none";
               	document.getElementById("profile").style.display ="block";
               	document.getElementById("user-logout").style.display ="none";
+                clearTimeout(orderupdateVar);
  
             } else if(v_href == "#!user-logout") {
 
@@ -37,6 +48,7 @@ $(document).ready(function(){
               	document.getElementById("order-data").style.display ="none";
               	document.getElementById("profile").style.display ="none";
               	document.getElementById("user-logout").style.display ="block";
+                clearTimeout(orderupdateVar);
             }
        });
 
@@ -413,7 +425,12 @@ $(document).ready(function(){
                autoOpen : false
            });
 
-
+        function UpdateOrderDataPriodically() {
+                // Update order data from database at every mint
+                // setInterval( UpdateOrderDataPriodically, 60000 );
+                placed_order_table.rows().remove();
+                placed_order_table.ajax.reload( null, false ); // user paging is not reset on reload;
+        }
            
 
 
@@ -536,8 +553,7 @@ $(document).ready(function(){
                                console.log(data);
                             }
                         });
-
- 
+                        ProfileDataEdited = true;
                     }
 
                var profile_data_inputs = document.getElementById('profile').getElementsByTagName('input');
