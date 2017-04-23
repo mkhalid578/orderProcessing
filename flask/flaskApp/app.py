@@ -18,12 +18,13 @@ class company(db.Model):
     name = db.Column(db.String(500), primary_key=True)
     password = db.Column(db.String(12), unique=True)
 
-class employee(db.Model):
+class employee(db.Model, UserMixin):
     __tablename__ = 'employinfo'
+    id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(100), unique=True)
     last_name = db.Column(db.String(100), unique=True)
     email_id = db.Column(db.String(100), unique=True)
-    user_id = db.Column(db.String(45), primary_key=True)
+    user_id = db.Column(db.String(45), unique=True)
     password = db.Column(db.String(10), unique=True)
     position = db.Column(db.String(45), unique=True)
     department = db.Column(db.String(100), unique=True)
@@ -35,26 +36,30 @@ class employee(db.Model):
 global_login_user_id = " "
 global_company_name = " "
 
+@login_manager.user_loader
+def load_user(id):
+    return employee.query.get(id)
+
 @app.route('/elogin', methods=['GET', 'POST'])
 def login():
     db = EmployInfo()
     error = None
     if request.method == 'POST':
+        user = employee.query.filter_by(user_id=str(request.form['username'])).first()
         try:
-            if request.form['username'] != db.getUserId(request.form['username']):
+            if request.form['username'] != user.user_id:
                 error = 'Invalid Username'
-            elif request.form['password'] != str(db.getPassword(request.form['username'])):
+            elif request.form['password'] != user.password:
                 error = 'Invalid Password'
             else:
                 global global_login_user_id # needed to modify global copy
                 global_login_user_id = request.form['username']
-
-                print request.form['username']
-                print request.form['password']
+                
+                login_user(user)
 
                 return redirect(url_for('placeOrder'))
 
-        except TypeError:
+        except AttributeError:
             error  = 'Invalid Username or Password'
 
     return render_template('employ-login.html', error=error)
@@ -77,10 +82,11 @@ def companyLogin():
             return redirect(url_for('login'))
     return render_template('company-login.html', error=error)
 
-#@login_required
+@login_required
 @app.route('/processOrder')
 def placeOrder():
-    return render_template('processing-window.html')
+    current = str(current_user.first_name).capitalize()
+    return render_template('processing-window.html', current=current)
 
 @app.route('/compLogin')
 def UserLogout():
@@ -272,4 +278,5 @@ def registerUser():
     return render_template('registerUser.html', error=error)
 
 if __name__ == "__main__":
+    app.secret_key = 'secret'
     app.run()
