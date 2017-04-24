@@ -18,6 +18,9 @@ class company(db.Model):
     __tablename__ = 'company'
     name = db.Column(db.String(500), primary_key=True)
     password = db.Column(db.String(12), unique=True)
+    def __init__(self, name, password):
+        self.name = name
+        self.password = password
 
 class employee(db.Model, UserMixin):
     __tablename__ = 'employinfo'
@@ -194,6 +197,7 @@ def load_order_data_for_list():
         order_data = db.getOrderListEmp(current_user.company_name, dept)
     else:
         order_data = db.getOrderList(current_user.company_name)
+
     return json.dumps({'status_data': order_data})
 
 @app.route('/load_deleted_order_data', methods=['GET', 'POST'])
@@ -239,18 +243,21 @@ def load_edited_order_data():
 
 @app.route('/registerCompany', methods=['GET', 'POST'])
 def registerCompany():
-    db = Company()
     error = None
     if request.method == 'POST':
         try:
-            if request.form['id'] != db.getName(request.form['id']):
-                pass
-                return redirect(url_for('companyLogin'))
+            comp_name = str(request.form['id']).strip()
+            comp = company.query.filter_by(name=comp_name).first()
+            if comp:
+                error = 'Company already exists'
             else:
-                error = "Company Already exists"
+                newComp = company(request.form['id'], request.form['password'])
+                db.session.add(newComp)
+                db.session.commit()
+                return redirect(url_for('companyLogin'))
         except TypeError:
             print 'got an exception'
-            
+
     return render_template('registerCompany.html', error=error)
 
 @app.route('/registerUser', methods=['GET', 'POST'])
