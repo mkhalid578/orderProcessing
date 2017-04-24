@@ -17,7 +17,7 @@
 # Sprint 1
 ## Backlog
 
-####Roles
+#### Roles
 
 | Member | Role|
 |--------|------|
@@ -158,7 +158,7 @@
 | Create User Login Sessions                                  | Muhammed Khalid  | 5                | Open |
 
 
-## Meeting 2 | Sprint Planning 
+## Meeting 3 | Daily Sprint 
 #### Location: Online 04/04
 * Still working on the same artifacts
 * Everyone is making good progress on their stories
@@ -173,4 +173,63 @@
 | Create UI showing list of orders                            | Vibhuti Patel    | 5                | Open |
 | Modify Login UI                                             | Muhammed Khalid  | 4                | Open |
 | Create User Login Sessions                                  | Muhammed Khalid  | 5                | Open |
+
+## Meeting 4 | Daily Sprint
+### Location: Online 04/05
+* Progress the same and still working on artifacts
+* No closed stories yet
+* Vibhuti is still working profile data functionality and plans to work on today
+* I am still working on Login UI modification and user login sessions and will continue till the next sprint
+
+## Meeting 5 | Daily Sprint
+### Location: Cellphone 04/11
+* Good progress on artifacts
+* Vibhuti worked on ajax calls to bridge JS and python code
+* Vibhuti completed the profile information user modification functionality
+* I implemented a SQL ORM using SQLAlchemy
+* Created UI allowing user to modify profile information story is closed
+* Create UI showing list of orders is closed
+
+| Stories                                                     | Assignee         | Estimate (Hours) | Status |
+|-------------------------------------------------------------|------------------|------------------|--------|
+| Create UI allowing user to modify profile information       | Vibhuti Patel    | 2                | Closed |
+| Give Edit Permissions for Orders depending on User Type     | Vibhuti Patel    | 1                | Open |
+| Add backend to User Submission UI                           | Muhammed Khalid  | 5                | Open |
+| Create UI showing list of orders                            | Vibhuti Patel    | 5                | Closed |
+| Modify Login UI                                             | Muhammed Khalid  | 4                | Open |
+| Create User Login Sessions                                  | Muhammed Khalid  | 5                | Open |
+
+## Meeting 6 | Daily Sprint
+### Location: Olsen 404 04/20
+* A quick sprint meeting after class
+* Muhammed is still working on the submission backend and user login sessions
+* Vibhuti is working on creating edit permissions for orders
+* No closed stories in this sprint meeting
+
+## Meeting 7 | Sprint Meeting
+### Location: Online 04/24
+* Approaching the end of the sprint. 
+* Vibhuti has completed and closed are stories that were assigned to her
+* Muhammed has also completed the stories that were assigned to him
+* Opened a new story: Add mySQL ORM and closed in this sprint
+* Currently working on a few bugs as we are doing a full integration with master
+* Closed stories: 
+
+| Stories                                                     | Assignee         | Estimate (Hours) | Status |
+|-------------------------------------------------------------|------------------|------------------|--------|
+| Create UI allowing user to modify profile information       | Vibhuti Patel    | 2                | Closed |
+| Give Edit Permissions for Orders depending on User Type     | Vibhuti Patel    | 1                | Closed |
+| Add backend to User Submission UI                           | Muhammed Khalid  | 5                | Closed |
+| Create UI showing list of orders                            | Vibhuti Patel    | 5                | Closed |
+| Modify Login UI                                             | Muhammed Khalid  | 4                | Closed |
+| Create User Login Sessions                                  | Muhammed Khalid  | 5                | Closed |
+| Add mySQL ORM                                               | Muhammed Khalid  | 3                | Closed |
+
+## Meeting 8 | Sprint End and Retrospective
+### Location: In class
+* Final demo will be done in class
+* An overview and retrospective of the sprint will be discussed in class
+* We have completed the project. 
+
+
 
