@@ -35,6 +35,16 @@ class employee(db.Model, UserMixin):
     company_name = db.Column(db.String(500), unique=True)
     order_authority = db.Column(db.String(200), unique=True)
 
+    def __init__(self, first_name, last_name, email_id, user_id, password, position, department, company_name, order_authority):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email_id = email_id
+        self.user_id = user_id
+        self.password = password
+        self.position = position
+        self.department = department
+        self.company_name = company_name
+        self.order_authority = order_authority
 
 
 global_login_user_id = " "
@@ -262,29 +272,33 @@ def registerCompany():
 
 @app.route('/registerUser', methods=['GET', 'POST'])
 def registerUser():
-    db = EmployInfo()
     error = None
     if request.method == 'POST':
         try:
-            if request.form['userId'] != db.getUserId(request.form['userId']):
-                pass
-        except TypeError:
-            firstName = request.form['first']
-            lastName = request.form['last']
-            email = request.form['email']
-            userId = request.form['userId']
-            password = request.form['password']
-            position = request.form['position']
-            dept = request.form['dept']
-            company= global_company_name
-            order_authority = request.form['employ-authority']
-            db.insertUser(firstName, lastName, email, userId, password,position,
-                          dept,company,order_authority)
-            return redirect(url_for('login'))
-        else:
-            error = "User already exists"
+            enteredUser = str(request.form['userId']).strip()
+            user = employee.query.filter_by(user_id=enteredUser).first()
+            if user:
+                error = "User already exists"
+            else:
+                firstName = request.form['first']
+                lastName = request.form['last']
+                email = request.form['email']
+                userId = request.form['userId']
+                password = request.form['password']
+                position = request.form['position']
+                dept = request.form['dept']
+                company = request.form['company']
+                order_authority = 'employ'
+                newUser = employee(firstName, lastName, email, userId, password,position,
+                                   dept,company,order_authority)
+                db.session.add(newUser)
+                db.session.commit()
+                return redirect(url_for('login'))
+        except AttributeError:
+            error = "There was a problem registering"
+
     return render_template('registerUser.html', error=error)
 
 if __name__ == "__main__":
     app.secret_key = 'secret'
-    app.run()
+    app.run(debug=True)
