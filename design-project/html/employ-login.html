@@ -1,0 +1,83 @@
+
+<html>
+	<head>
+  	<title>Oder Processing Application </title>
+	</head>
+
+	<body>
+
+  	<h1 style="color: chocolate;color-adjust: exact;">
+			<br>Order Processing System</br>
+		</h1>
+		<hr style="color: brown;width: auto;  display: block;
+    						margin-top: 0.5em;margin-bottom: 0.5em;
+    						margin-left: auto;margin-right: auto;
+    						border-style: inset; border-width: 10px;">
+
+    <h1>Employ Login</h1>
+
+	  <div id="employ-login">
+			<p style="padding-left: 250px;">Please, enter employ's login information.</p>
+			<form style="padding-left: 250px;">
+					Employ User Id: 
+						<input id="employ-user-id" type="text" name="EmployUserId" value=" "><br><br>
+					Password: 
+						<input id="employ-password" type="text" name="EmployPassword" value="******"><br><br>
+			<button id="bt-employ-login" type="button" onclick="alert('Hello world!')" 
+							style="font-size: inherit;" >Sign In</button>
+			</form>
+			<hr style="width: 500px;color: brown;height: 5px; margin-left: 200px; " >
+
+			<h1 style="padding-left: 200px;font-size: unset;color: steelblue;" >
+					Register New Employ Account</h1>
+			<button id="bt-new-employ-account" type="button" onclick="alert('Hello world!')"
+    	        style="font-size: inherit; margin-left: 250px; display: block;" >
+					 		Create</button>
+		
+			<form action="/action_page.php" 
+    	      style="padding-left: 250px;padding-top: 25px;width: 400px; display: none;">
+  			<fieldset>
+    	
+	      <label id="incorrect-new-employ-userid" style="display: none;" >
+							<br>Please, correct your user-id. user-id should not have more than 45 char.<br></label>
+  	  	
+	      <label id="incorrect-new-employ-password" style="display: none;" >
+							<br>Please, correct your password. password should not have more than 10 char.<br></label>
+    		<br>
+    		<legend>Employ information:</legend>
+
+  	  		Employ First Name:<br>
+	    				<input id="new-employ-first-name" type="text" name="NewEmployFirstName" value=" ">
+    			<br><br>
+  	  		Employ Last Name:<br>
+	    				<input id="new-employ-last-name" type="text" name="NewEmployLastName" value=" ">
+    			<br><br>
+  	  		Employ Email Id:<br>
+	    				<input id="new-employ-email-id" type="text" name="NewEmployEmailId" value=" ">
+    			<br><br>
+  	  		Employ User Id:<br>
+	    				<input id="new-employ-user-id" type="text" name="NewEmployUserId" value=" ">
+    			<br><br>
+    			Employ Password: (1-10 char long)<br>
+  	  				<input id="new-employ-password" type="text" name="NewEmployPassword" value="******">
+	    		<br><br>
+
+    			Employ Position:<br>
+  	  				<input id="new-employ-position" type="text" name="NewEmployPosition" value="">
+	    		<br><br>
+    			Employ Department:<br>
+  	  				<input id="new-employ-department" type="text" name="NewEmployDepartment" value="">
+	    		<br><br>
+    			Order Handler:<br>
+  	  				<input id="new-employ-order-handler" type="radio" name="OrderHandler" value="true">True<br>
+  	  				<input id="new-employ-order-handler-not" type="radio" checked name="OrderHandlerNot" value="false">False<br>
+	    		<br><br>
+
+    			<input id="submit-new-employ-account" type="submit" value="Submit">
+  				</fieldset>
+			</form>
+  	</div>
+	</body>
+
+</html>
+

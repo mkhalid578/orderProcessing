@@ -1,0 +1,76 @@
+
+<div class="tab-pane" id="profile" style="display: none;" >
+	<form action="/action_page.php"
+            style="padding-left: 50px;padding-top: 25px;width: 400px;">
+		<fieldset style="font-size: 14px;font-weight: bold;" >
+
+				<br>
+				<legend id="user-profile-blog">User Profile:</legend>
+
+				<button id="allow-profile-edit-bt" type="button" style="margin-left: 350px;margin-top: -25px;"
+                 >Edit</button>
+        <br>
+        <br>
+
+        Employ First Name:<br>
+        		<input class="profile-input-box" id="current-employ-first-name" 
+					  			type="text" name="CurrentEmployFirstName" value="vibhuti" readonly>
+            <br><br>
+        Employ Last Name:<br>
+            <input class="profile-input-box" id="current-employ-last-name"
+                  type="text" name="CurrentEmployLastName" value=" "  readonly>
+            <br><br>
+        Employ Email Id:<br>
+            <input class="profile-input-box" id="current-employ-email-id"
+                  type="text" name="CurrentEmployEmailId" value=" " readonly>
+            <br><br>
+        Employ User Id:<br>
+            <input class="profile-input-box" id="current-employ-user-id"
+                  type="text" name="CurrentEmployUserId" value=" " readonly>
+            <br><br>
+        Employ Password: (1-10 char long)<br>
+            <input class="profile-input-box" id="current-employ-password"
+                  type="password" name="CurrentEmployPassword" value="1811" readonly>
+            <br><br>
+
+        Employ Position:<br>
+            <input class="profile-input-box" id="current-employ-position"
+                  type="text" name="CurrentEmployPosition" value="" readonly>
+            <br><br>
+        Employ Department:<br>
+            <input class="profile-input-box" id="current-employ-department"
+                  type="text" name="CurrentEmployDepartment" value="" readonly>
+            <br><br>
+        Order Handler:<br>
+
+						<label for="current-employ-order-handler">Order Handler:</label>
+  							<input type="radio" name="current-employ-authority" id="current-employ-order-handler"
+                       value="order-handler" style="margin-left: 100px;" disabled><br>
+
+						<label for="current-employ-manager">Manager:</label>
+  							<input type="radio" name="current-employ-authority" id="current-employ-manager"
+                       value="manager" style="margin-left: 100px;" disabled><br>
+
+						<label for="current-employ-worker">Employ:</label>
+  							<input type="radio" name="current-employ-authority" id="current-employ-worker" 
+                       value="employ" style="margin-left: 100px;" disabled><br>
+
+            <br><br>
+
+        <input id="submit-current-employ-account-btn" type="button" value="Submit" disabled>
+        <input id="cancel-current-employ-account-btn" type="button" value="Cancel" disabled>
+
+		</fieldset>
+	</form>
+</div>
+
+<div id="EditedProfileErrorDialog" class="flora" title="Profile data Error"  hidden="hidden">
+      <label id="profile-deta-error-dialogtext"
+             style="text-align: center; color: brown; font-size: larger;">
+            Please, enter all the information regrading to the profile.
+      </label><br>
+
+</div>
+
+
+
