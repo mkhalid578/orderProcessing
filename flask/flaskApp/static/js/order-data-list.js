@@ -457,10 +457,13 @@ $(document).ready(function(){
                                   var order_authority_data = obj.order_authority;
                                   if (order_authority_data == "order-handler"){
                                       document.getElementById("current-employ-order-handler").checked = true;
+                                      document.getElementById("submit-new-order-bt").disabled = true;
                                   } else if (order_authority_data == "manager"){
                                       document.getElementById("current-employ-manager").checked = true;
+                                      document.getElementById("submit-new-order-bt").disabled = false;
                                   } else {
                                       document.getElementById("current-employ-worker").checked = true;
+                                      document.getElementById("submit-new-order-bt").disabled = false;
                                   }
 
                               } else {
