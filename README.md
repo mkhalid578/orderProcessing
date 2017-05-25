@@ -1,4 +1,4 @@
-# SW Engineering Project
+# Project for SW Engineering I
 ## Order Processing Application
 
 ## How to Run Our App
